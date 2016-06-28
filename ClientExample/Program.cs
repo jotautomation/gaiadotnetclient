@@ -23,6 +23,17 @@ namespace JOT.Client
             var i = client.Inputs;
             var a = client.StateApps;
 
+            Task.Run(() =>
+            {
+                a["MyStatefulApplication"].WaitState("FirstState");
+                Console.WriteLine("Hep!");
+            }
+            );
+
+            Console.WriteLine(a["MyStatefulApplication"].State);
+
+            Thread.Sleep(100);
+
             a["MyStatefulApplication"].Actions["trigger-FirstState"]();
 
             o["Output1"].SetOutput(true);
