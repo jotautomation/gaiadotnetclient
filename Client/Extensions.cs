@@ -28,7 +28,7 @@ namespace JOT.RESTClient
             return apps;
         }
 
-        public static Dictionary<string, Func<string>> GetActions(this Entity value)
+        public static Dictionary<string, Func<object>> GetActions(this Entity value)
         {
             var client = new RestClient(new Uri(value.href));
             var request = new RestRequest("", Method.GET);
@@ -37,7 +37,7 @@ namespace JOT.RESTClient
 
             var content = (RestResponse<Siren>)client.Execute<Siren>(request);
 
-            var actionDictionary = new Dictionary<string, Func<string>>();
+            var actionDictionary = new Dictionary<string, Func<object>>();
 
             foreach (var action in content.Data.actions)
             {
@@ -58,11 +58,13 @@ namespace JOT.RESTClient
                                  actionRequest.AddBody(obj);
                              }
 
-                         var resp = actionClient.Execute(actionRequest);
+                         var resp = actionClient.Execute<object>(actionRequest);
 
                          HandleResponse(resp.StatusCode);
 
-                         if (resp.ContentType.Contains("json") | resp.ContentType.Contains("text/plain"))
+                         if (resp.ContentType.Contains("json"))
+                             return resp.Data;
+                         if (resp.ContentType.Contains("text/plain"))
                              return resp.Content;
                          else throw new NotSupportedException("Other than json or text/plain responses are not supported. Response type is " +
                              resp.ContentType);

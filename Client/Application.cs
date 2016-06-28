@@ -21,21 +21,21 @@ namespace JOT.RESTClient
             }
         }
 
-        public Application(string name, Dictionary<string, Func<string>> actions)
+        public Application(string name, Dictionary<string, Func<object>> actions)
             : base(name, actions)
         { }
     }
 
     public class ApplicationBase
     {
-        public Dictionary<string, Func<string>> Actions { get; private set; }
+        public Dictionary<string, Func<object>> Actions { get; private set; }
 
         public ApplicationBase()
         {
 
         }
 
-        public ApplicationBase(string name, Dictionary<string, Func<string>> actions)
+        public ApplicationBase(string name, Dictionary<string, Func<object>> actions)
         {
             Name = name;
             Actions = actions;

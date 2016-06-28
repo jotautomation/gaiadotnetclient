@@ -13,7 +13,7 @@ namespace JOT.RESTClient
 
         }
 
-        public DigitalInput(string name, Dictionary<string, Func<string>> actions) : base(name, actions)
+        public DigitalInput(string name, Dictionary<string, Func<object>> actions) : base(name, actions)
         {
         }
     }

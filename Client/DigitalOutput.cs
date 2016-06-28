@@ -12,7 +12,7 @@ namespace JOT.RESTClient
         {
 
         }
-        public DigitalOutput(string name, Dictionary<string, Func<string>> actions) : base(name, actions)
+        public DigitalOutput(string name, Dictionary<string, Func<object>> actions) : base(name, actions)
         {
         }
 
