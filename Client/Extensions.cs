@@ -60,7 +60,7 @@ namespace JOT.RESTClient
 
                          var resp = actionClient.Execute<object>(actionRequest);
 
-                         HandleResponse(resp.StatusCode);
+                         HandleResponse(resp);
 
                          if (resp.ContentType.Contains("json"))
                              return resp.Data;
@@ -74,11 +74,17 @@ namespace JOT.RESTClient
             return actionDictionary;
         }
 
-        private static void HandleResponse(HttpStatusCode statusCode)
+        private static void HandleResponse(IRestResponse<object> resp)
         {
-            if (statusCode != HttpStatusCode.OK)
-                throw new Exception("Request failed. Status " + statusCode);
+            if (resp.StatusCode != HttpStatusCode.OK)
+            {
+                if (resp.ErrorException != null)
+                    throw resp.ErrorException;
+                throw new Exception("Request failed. Status " + resp.StatusCode);
+            }
         }
+
+
 
         public static Method ToRestSharpMethod(this string value)
         {
