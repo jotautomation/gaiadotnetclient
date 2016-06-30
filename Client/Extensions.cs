@@ -60,6 +60,13 @@ namespace JOT.RESTClient
 
                          var resp = actionClient.Execute<object>(actionRequest);
 
+#warning Major hack! Must be fixed!
+                         // This is workaround for https://jotautomation.atlassian.net/browse/FTSW-213
+                         // If we get the protocol violation error we just resend the request
+                         if (resp.ErrorException != null && resp.ErrorMessage == "The server committed a protocol violation. Section=ResponseStatusLine")
+                             resp = actionClient.Execute<object>(actionRequest);
+
+
                          HandleResponse(resp);
 
                          if (resp.ContentType.Contains("json"))
