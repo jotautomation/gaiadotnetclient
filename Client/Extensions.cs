@@ -37,6 +37,12 @@ namespace JOT.RESTClient
 
             var content = (RestResponse<Siren>)client.Execute<Siren>(request);
 
+            //Include blocked actions to actions. TODO: add way to check on runtime if action is blocke or not
+            var actions = content.Data.actions;
+            var blockedActions = content.Data.blockedActions;
+            if (blockedActions != null)
+                actions.AddRange(blockedActions);
+
             var actionDictionary = new Dictionary<string, Func<object>>();
 
             foreach (var action in content.Data.actions)

@@ -10,6 +10,7 @@ namespace JOT.RESTClient
         public dynamic properties { get; set; }
         public List<Entity> entities { get; set; }
         public List<Action> actions { get; set; }
+        public List<Action> blockedActions { get; set; }
         public List<Link> links { get; set; }
 
     }
