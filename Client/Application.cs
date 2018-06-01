@@ -19,7 +19,8 @@ namespace JOT.RESTClient
         {
             get
             {
-                return (T)Convert.ChangeType(Actions["get-state"](), typeof(T));
+                var resp = (Dictionary<string,object>)Actions["state"]();
+                return (T)Convert.ChangeType(resp["value"], typeof(T));
             }
         }
 
