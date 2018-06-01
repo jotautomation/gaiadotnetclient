@@ -20,7 +20,7 @@ namespace JOT.RESTClient
 
         public void FetchApplications()
         {
-            var request = new RestRequest("/applications", Method.GET);
+            var request = new RestRequest("api/applications", Method.GET);
 
             request.AddHeader("Accept", "application/vnd.siren+json");
 
