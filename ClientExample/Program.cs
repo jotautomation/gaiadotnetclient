@@ -13,8 +13,6 @@ namespace JOT.Client
         static void Main(string[] args)
         {
 
-            Thread.Sleep(5000);
-
             var client = new JOTRestClient("http://192.168.133.130:1234");
 
             client.FetchApplications();
