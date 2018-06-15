@@ -12,6 +12,11 @@ namespace JOT.RESTClient
 {
     public static class Extensions
     {
+        public static IReadOnlyDictionary<string, ActionDelegate> GetStateTriggers(this Siren value)
+        {
+            return GetActions(value);
+        }
+
         public static IReadOnlyDictionary<string, T> GetApplications<T>(this Siren value, string type)
         {
             var apps = new Dictionary<string, T>();
@@ -20,15 +25,18 @@ namespace JOT.RESTClient
             {
                 if (item.@class.Contains(type))
                 {
-                    apps.Add(item.properties["name"], (T)Activator.CreateInstance(typeof(T), (string)item.properties["name"],
-                    GetActions(item)));
+                    if (item.properties["name"] != "NA")
+                    {
+                        apps.Add(item.properties["name"], (T)Activator.CreateInstance(typeof(T), (string)item.properties["name"],
+                        GetActionsFromEntity(item)));
+                    }
                 }
             }
 
             return apps;
         }
 
-        public static Dictionary<string, Func<object>> GetActions(this Entity value)
+        public static Dictionary<string, ActionDelegate> GetActionsFromEntity(this Entity value)
         {
             var client = new RestClient(new Uri(value.href));
             var request = new RestRequest("", Method.GET);
@@ -36,47 +44,62 @@ namespace JOT.RESTClient
             request.AddHeader("Accept", "application/vnd.siren+json");
 
             var content = (RestResponse<Siren>)client.Execute<Siren>(request);
+            var actionDictionary = GetActions(content.Data);
+            return actionDictionary;
+        }
 
-            //Include blocked actions to actions. TODO: add way to check on runtime if action is blocke or not
-            var actions = content.Data.actions;
-            var blockedActions = content.Data.blockedActions;
+        private static Dictionary<string, ActionDelegate> GetActions(Siren content)
+        {
+            //Include blocked actions to actions. TODO: add way to check on runtime if action is blocked or not
+            var actions = content.actions;
+            var blockedActions = content.blockedActions;
             if (blockedActions != null)
                 actions.AddRange(blockedActions);
 
-            var actionDictionary = new Dictionary<string, Func<object>>();
+            var actionDictionary = new Dictionary<string, ActionDelegate>();
 
-            foreach (var action in content.Data.actions)
+            foreach (var action in content.actions)
             {
                 actionDictionary.Add(action.name,
-                    () =>
-                     {
-                         var actionClient = new RestClient(new Uri(action.href));
-                         var actionRequest = new RestRequest("", action.method.ToRestSharpMethod());
+                    (Dictionary<string, object> UserDefinedFields) =>
+                    {
+                        var actionClient = new RestClient(new Uri(action.href));
+                        var actionRequest = new RestRequest("", action.method.ToRestSharpMethod());
 
-                         actionRequest.AddHeader("Content", "application/vnd.siren+json");
-                         actionRequest.RequestFormat = DataFormat.Json;
+                        actionRequest.AddHeader("Content", "application/vnd.siren+json");
+                        actionRequest.RequestFormat = DataFormat.Json;
 
-                         if (action.fields != null)
-                             foreach (var field in action.fields)
-                             {
-                                 var obj = new ExpandoObject();
-                                 obj.AddProperty(field.name, field.value);
-                                 actionRequest.AddBody(obj);
-                             }
+                        if (action.fields != null)
+                        {
+                            var obj = new ExpandoObject();
 
-                         var resp = actionClient.Execute<object>(actionRequest);
+                            foreach (var field in action.fields)
+                            {
+                                if (UserDefinedFields != null && UserDefinedFields.ContainsKey(field.name))
+                                    obj.AddProperty(field.name, UserDefinedFields[field.name]);
+                                else if (field.value != null)
+                                    obj.AddProperty(field.name, field.value);
+                                else
+                                    throw new Exception("Value of field missing");
 
-                         HandleResponse(resp);
+                            }
 
-                         if (resp.ContentType.Contains("json"))
-                             return resp.Data;
-                         if (resp.ContentType.Contains("text/plain"))
-                             return resp.Content;
-                         else throw new NotSupportedException("Other than json or text/plain responses are not supported. Response type is " +
-                             resp.ContentType);
+                            actionRequest.AddBody(obj);
+                        }
+                        var resp = actionClient.Execute<object>(actionRequest);
 
-                     });
+                        HandleResponse(resp);
+
+                        if (resp.ContentType.Contains("json"))
+                            return resp.Data;
+                        if (resp.ContentType.Contains("text/plain"))
+                            return resp.Content;
+                        else throw new NotSupportedException("Other than json or text/plain responses are not supported. Response type is " +
+                            resp.ContentType);
+
+                    });
             }
+
             return actionDictionary;
         }
 

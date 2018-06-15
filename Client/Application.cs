@@ -57,21 +57,21 @@ namespace JOT.RESTClient
                 throw new TimeoutException("Timeout while waiting " + state + " for " + this.Name + ". Current state: " + this.State);
         }
 
-        public Application(string name, Dictionary<string, Func<object>> actions)
+        public Application(string name, Dictionary<string, ActionDelegate> actions)
             : base(name, actions)
         { }
     }
 
     public class ApplicationBase
     {
-        public Dictionary<string, Func<object>> Actions { get; private set; }
+        public Dictionary<string, ActionDelegate> Actions { get; private set; }
 
         public ApplicationBase()
         {
 
         }
 
-        public ApplicationBase(string name, Dictionary<string, Func<object>> actions)
+        public ApplicationBase(string name, Dictionary<string, ActionDelegate> actions)
         {
             Name = name;
             Actions = actions;

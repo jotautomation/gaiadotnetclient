@@ -21,6 +21,8 @@ namespace JOT.Client
             var i = client.Inputs;
             var a = client.StateApps;
 
+            client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
+
             /*
              * // Here is example how to wait for application to go to certain state
             Task.Run(() =>
