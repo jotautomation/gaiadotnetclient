@@ -25,25 +25,34 @@ namespace JOT.Client
 
             Console.WriteLine("State: " + client.State);
 
-            while (!client.TestBoxClosing)
+            while (true)
             {
-                
-                Thread.Sleep(10);
+                //This is normal test sequence. 
+
+                // Step 1: We are waiting that test box gets ready and operator puts DUT in
+
+                while (!(client.TestBoxClosing || client.ReadyForTesting))
+                {
+
+                    Thread.Sleep(10);
+                }
+
+                // Step 2. Operator did put DUT in. DUT(s) is locked and it is safe to attach battery connector, USB etc.
+                // Test box is still closing so it is not audio or RF shielded and robot actions are not allowed
+
+                Console.WriteLine("Test box closing!");
+
+                while (!client.ReadyForTesting)
+                {
+                    Thread.Sleep(10);
+                }
+
+                // Step 3: Test box is fully closed and we are ready for actual testing.
+                Console.WriteLine("Ready for testing!");
+
+                // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
+                client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "pass" } });
             }
-
-            Console.WriteLine("Test box closing!");
-            // Now DUT(s) is locked and it is safe to attach battery connector, USB etc.
-
-            while (!client.ReadyForTesting)
-            {                
-                Thread.Sleep(10);
-            }
-
-            //Now test box is fully closed and we are ready for actual testing.
-            Console.WriteLine("Ready for testing!");
-
-
-            client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "pass" } });
 
             // Change to FingerBase too. Note! Tool change can be defined also in G-code
             r.Actions["changeTo-FingerBase"]();
