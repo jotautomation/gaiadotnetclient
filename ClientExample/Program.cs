@@ -1,4 +1,5 @@
-﻿using JOT.RESTClient;
+﻿using JOT.ClientExample;
+using JOT.RESTClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,15 @@ namespace JOT.Client
             var o = client.Outputs;
             var i = client.Inputs;
             var a = client.StateApps;
+            var r = client.Robots["MainRobot"];
+
 
             client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
+
+            // Change to FingerBase too. Note! Tool change can be defined also in G-code
+            r.Actions["changeTo-FingerBase"]();
+
+            r.Actions["cnc_run"](plainText:GcodeExample.GCode);
 
             /*
              * // Here is example how to wait for application to go to certain state

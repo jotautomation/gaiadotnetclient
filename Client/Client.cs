@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JOT.RESTClient
 {
-    public delegate object ActionDelegate(Dictionary<string, object> fields=null);
+    public delegate object ActionDelegate(Dictionary<string, object> fields = null, string plainText = null);
     public class JOTRestClient : RestSharp.RestClient
     {
 
@@ -58,6 +58,7 @@ namespace JOT.RESTClient
             Outputs = response.Data.GetApplications<DigitalOutput>("DigitalOutput");
             Inputs = response.Data.GetApplications<DigitalInput>("DigitalInput");
             StateApps = response.Data.GetApplications<Application<string>>("StatefulApplication");
+            Robots = response.Data.GetApplications<Application<string>>("CncRobot");
 
             request = new RestRequest("api", Method.GET);
 

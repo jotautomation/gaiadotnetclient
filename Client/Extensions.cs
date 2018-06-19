@@ -43,6 +43,7 @@ namespace JOT.RESTClient
 
             request.AddHeader("Accept", "application/vnd.siren+json");
 
+            //TODO: Validate response
             var content = (RestResponse<Siren>)client.Execute<Siren>(request);
             var actionDictionary = GetActions(content.Data);
             return actionDictionary;
@@ -61,33 +62,42 @@ namespace JOT.RESTClient
             foreach (var action in content.actions)
             {
                 actionDictionary.Add(action.name,
-                    (Dictionary<string, object> UserDefinedFields) =>
+                    (Dictionary<string, object> UserDefinedFields, string plainText) =>
                     {
                         var actionClient = new RestClient(new Uri(action.href));
                         var actionRequest = new RestRequest("", action.method.ToRestSharpMethod());
+                        IRestResponse<object> resp;
 
-                        actionRequest.AddHeader("Content", "application/vnd.siren+json");
-                        actionRequest.RequestFormat = DataFormat.Json;
-
-                        if (action.fields != null)
+                        if (action.type == "text/plain")
                         {
-                            var obj = new ExpandoObject();
-
-                            foreach (var field in action.fields)
-                            {
-                                if (UserDefinedFields != null && UserDefinedFields.ContainsKey(field.name))
-                                    obj.AddProperty(field.name, UserDefinedFields[field.name]);
-                                else if (field.value != null)
-                                    obj.AddProperty(field.name, field.value);
-                                else
-                                    throw new Exception("Value of field missing");
-
-                            }
-
-                            actionRequest.AddBody(obj);
+                            actionRequest.AddHeader("Content-Type", "text/plain");
+                            actionRequest.AddParameter("text/plain", plainText, ParameterType.RequestBody);
                         }
-                        var resp = actionClient.Execute<object>(actionRequest);
+                        else
+                        {
+                            actionRequest.AddHeader("Content", "application/vnd.siren+json");
+                            actionRequest.RequestFormat = DataFormat.Json;
 
+                            if (action.fields != null)
+                            {
+                                var obj = new ExpandoObject();
+
+                                foreach (var field in action.fields)
+                                {
+                                    if (UserDefinedFields != null && UserDefinedFields.ContainsKey(field.name))
+                                        obj.AddProperty(field.name, UserDefinedFields[field.name]);
+                                    else if (field.value != null)
+                                        obj.AddProperty(field.name, field.value);
+                                    else
+                                        throw new Exception("Value of field missing");
+
+                                }
+
+                                actionRequest.AddBody(obj);
+                            }
+                            
+                        }
+                        resp = actionClient.Execute<object>(actionRequest);
                         HandleResponse(resp);
 
                         if (resp.ContentType.Contains("json"))
