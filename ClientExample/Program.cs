@@ -23,6 +23,13 @@ namespace JOT.Client
             var a = client.StateApps;
             var r = client.Robots["MainRobot"];
 
+            Console.WriteLine("State: " + client.State);
+
+            if(client.ReadyForTesting)
+            {
+                Console.WriteLine("Ready for testing!");
+            }
+
 
             client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
 

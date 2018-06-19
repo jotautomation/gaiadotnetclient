@@ -17,6 +17,7 @@ namespace JOT.RESTClient
         public IReadOnlyDictionary<string, Application<string>> StateApps { get; private set; }
         public IReadOnlyDictionary<string, Application<string>> Robots { get; private set; }
         public IReadOnlyDictionary<string, ActionDelegate> StateTriggers { get; private set; }
+
         public bool ReadyForTesting
         {
             get
