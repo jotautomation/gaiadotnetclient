@@ -47,7 +47,7 @@ namespace JOT.RESTClient
 
         public JOTRestClient(Uri baseUrl) : base(baseUrl) { }
 
-        public void FetchApplications()
+        public void Populate()
         {
             var request = new RestRequest("api/applications", Method.GET);
 

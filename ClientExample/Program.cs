@@ -15,7 +15,7 @@ namespace JOT.Client
 
             var client = new JOTRestClient("http://192.168.133.130:1234");
 
-            client.FetchApplications();
+            client.Populate();
 
             var o = client.Outputs;
             var i = client.Inputs;
