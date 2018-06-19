@@ -31,6 +31,19 @@ namespace JOT.RESTClient
             }
         }
 
+        public bool TestBoxClosing
+        {
+            get
+            {
+                if (this.State.Contains("Active_ClosingTestBox"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public string State
         {
             get
