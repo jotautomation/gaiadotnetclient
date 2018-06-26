@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace JOT.RESTClient
+namespace JOT.GaiaClient
 {
     public class Application<T> : ApplicationBase
     {

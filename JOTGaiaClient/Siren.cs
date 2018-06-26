@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JOT.RESTClient
+namespace JOT.GaiaClient
 {
 
     public class Siren

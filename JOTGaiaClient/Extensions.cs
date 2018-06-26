@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Dynamic;
 using System.Net;
 
-namespace JOT.RESTClient
+namespace JOT.GaiaClient
 {
     public static class Extensions
     {

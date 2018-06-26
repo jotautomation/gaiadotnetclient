@@ -1,11 +1,8 @@
 ﻿using JOT.ClientExample;
-using JOT.RESTClient;
+using JOT.GaiaClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace JOT.Client
 {
@@ -14,7 +11,7 @@ namespace JOT.Client
         static void Main(string[] args)
         {
 
-            var client = new JOTRestClient("http://172.23.225.118:1234");
+            var client = new JOTGaiaClient("http://192.168.133.130:1234");
 
             client.Populate();
 
@@ -51,7 +48,7 @@ namespace JOT.Client
                 Console.WriteLine("Ready for testing!");
 
                 // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
-                client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "pass" } });
+                client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
             }
 
             // Change to FingerBase too. Note! Tool change can be defined also in G-code
@@ -68,11 +65,13 @@ namespace JOT.Client
             }
             );
             */
+
+            // TODO: Add real application here
             Console.WriteLine(a["RobotToolLock"].State);
 
             Thread.Sleep(100);
 
-            a["OduMacControl"].Actions["set-Work"]();
+            a["SideButtonPresser"].Actions["set-Work"]();
 
             Console.WriteLine(a["RobotToolLock"].State);
 

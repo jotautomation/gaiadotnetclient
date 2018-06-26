@@ -6,10 +6,10 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JOT.RESTClient
+namespace JOT.GaiaClient
 {
     public delegate object ActionDelegate(Dictionary<string, object> fields = null, string plainText = null);
-    public class JOTRestClient : RestSharp.RestClient
+    public class JOTGaiaClient : RestSharp.RestClient
     {
 
         public IReadOnlyDictionary<string, DigitalOutput> Outputs { get; private set; }
@@ -57,9 +57,9 @@ namespace JOT.RESTClient
             }
         }
 
-        public JOTRestClient(string baseUrl) : base(baseUrl) { }
+        public JOTGaiaClient(string baseUrl) : base(baseUrl) { }
 
-        public JOTRestClient(Uri baseUrl) : base(baseUrl) { }
+        public JOTGaiaClient(Uri baseUrl) : base(baseUrl) { }
 
         public void Populate()
         {

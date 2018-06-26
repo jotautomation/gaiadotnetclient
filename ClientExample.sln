@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientExample", "ClientExample\ClientExample.csproj", "{9F496C24-6E38-4DCC-8DED-400485ED7A54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{9F496C24-6E38-4DCC-8DED-400485ED7A54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOTRestClient", "Client\JOTRestClient.csproj", "{8269EFDC-F007-4512-9D36-360865DB9854}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOTGaiaClient", "JOTGaiaClient\JOTGaiaClient.csproj", "{8269EFDC-F007-4512-9D36-360865DB9854}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

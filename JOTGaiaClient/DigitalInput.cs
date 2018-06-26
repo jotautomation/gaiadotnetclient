@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JOT.RESTClient
+namespace JOT.GaiaClient
 {
     public class DigitalInput : Application<bool>
     {
