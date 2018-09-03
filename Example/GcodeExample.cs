@@ -8,6 +8,22 @@ namespace JOT.ClientExample
 {
     public static class GcodeExample
     {
+        public static string MIC_Pos  // Check coordinates for MICrophone speaker
+        {
+            get
+            {
+                return
+@"(ToolToUse:Finger1)
+
+N000 F150 E5000 E-5000
+N010 G17
+
+('MIC Pos')
+N100 G01 Y142.923 X55.759 Z1
+";
+            }
+        }
+
         public static string GCode
         {
             get
@@ -20,7 +36,7 @@ N010 G17
 
 ('X=133.964, Y=41.959, Z=70')
 
-('Power button')
+('Power button ')
 N020 G01 X133.964 Y41.984 Z1
 N030 G01 X133.964 Y41.984 Z67
 N040 G01 X133.964 Y41.984 Z73.5

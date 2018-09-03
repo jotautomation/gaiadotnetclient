@@ -11,14 +11,17 @@ namespace JOT.Client
         static void Main(string[] args)
         {
 
-            var client = new JOTGaiaClient("http://192.168.133.130:1234");
+            var client = new JOTGaiaClient("http://172.23.225.118:1234");
 
             client.Populate();
 
-            var o = client.Outputs;
-            var i = client.Inputs;
-            var a = client.StateApps;
-            var r = client.Robots["MainRobot"];
+            var applications = client.StateApps;
+            var robot = client.Robots["MainRobot"];
+
+            //var percentage = 50;
+            //client.LightSources["RobotLight3200k"].Actions["set-percentage"](new Dictionary<string, object>() { { "value", percentage } });
+
+
 
             Console.WriteLine("State: " + client.State);
 
@@ -39,6 +42,8 @@ namespace JOT.Client
 
                 Console.WriteLine("Test box closing!");
 
+                applications["BatteryConnector"].Actions["set-Work"]();
+
                 while (!client.ReadyForTesting)
                 {
                     Thread.Sleep(10);
@@ -47,14 +52,21 @@ namespace JOT.Client
                 // Step 3: Test box is fully closed and we are ready for actual testing.
                 Console.WriteLine("Ready for testing!");
 
+
+                robot.Actions["cnc_run"](plainText: GcodeExample.GCode);
+
+                Thread.Sleep(1000);
+
+                robot.WaitState("Ready", 30000);
+
+                applications["BatteryConnector"].Actions["set-Home"]();
+                
                 // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
                 client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
             }
 
             // Change to FingerBase too. Note! Tool change can be defined also in G-code
-            r.Actions["changeTo-FingerBase"]();
-
-            r.Actions["cnc_run"](plainText:GcodeExample.GCode);
+            robot.Actions["changeTo-FingerBase"]();
 
             /*
              * // Here is example how to wait for application to go to certain state
@@ -66,19 +78,8 @@ namespace JOT.Client
             );
             */
 
-            // TODO: Add real application here
-            Console.WriteLine(a["RobotToolLock"].State);
-
-            Thread.Sleep(100);
-
-            a["SideButtonPresser"].Actions["set-Work"]();
-
-            Console.WriteLine(a["RobotToolLock"].State);
-
-            o["Output1"].SetOutput(true);
-
-            Console.WriteLine(o["Output1"].State);
-            Console.WriteLine(a["MyStatefulApplication"].State);
+        
+            Console.WriteLine(applications["MyStatefulApplication"].State);
             Console.ReadLine();
         }
     }
