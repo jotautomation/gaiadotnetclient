@@ -19,9 +19,9 @@ namespace JOT.GaiaClient
         public void SetOutput(bool value)
         {
             if (value)
-                this.Actions["set-state-on"]();
+                this.Actions["set-ON"]();
             else
-                this.Actions["set-state-off"]();
+                this.Actions["set-OFF"]();
         }
     }
 }
