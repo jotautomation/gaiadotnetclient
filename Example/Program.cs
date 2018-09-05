@@ -11,7 +11,7 @@ namespace JOT.Client
         static void Main(string[] args)
         {
 
-            var client = new JOTGaiaClient("http://192.168.133.130:1234");
+            var client = new JOTGaiaClient("http://172.23.225.118:1234");
 
             client.Populate();
 
@@ -21,6 +21,10 @@ namespace JOT.Client
             var r = client.Robots["MainRobot"];
 
             Console.WriteLine("State: " + client.State);
+
+            //Note! There is a bug on API here. Positions are on array thus we need "extra" [0] in the middle.
+            //This will be fixed someday
+            Console.WriteLine(r.Properties["position"][0]["x"]);
 
             while (true)
             {

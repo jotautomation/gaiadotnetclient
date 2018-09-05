@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -57,27 +58,44 @@ namespace JOT.GaiaClient
                 throw new TimeoutException("Timeout while waiting " + state + " for " + this.Name + ". Current state: " + this.State);
         }
 
-        public Application(string name, Dictionary<string, ActionDelegate> actions)
-            : base(name, actions)
+        public Application(string name, Dictionary<string, ActionDelegate> actions, string href)
+            : base(name, actions, href)
         { }
     }
 
     public class ApplicationBase
     {
         public Dictionary<string, ActionDelegate> Actions { get; private set; }
+        public Dictionary<string, dynamic> Properties
+        {
+            get
+            {
+                var client = new RestClient(new Uri(Href));
+                var request = new RestRequest("", Method.GET);
+
+                request.AddHeader("Accept", "application/vnd.siren+json");
+
+                //TODO: Validate response
+                var content = (RestResponse<Entity>)client.Execute<Entity>(request);
+               
+                return content.Data.properties;
+            }
+        }
 
         public ApplicationBase()
         {
 
         }
 
-        public ApplicationBase(string name, Dictionary<string, ActionDelegate> actions)
+        public ApplicationBase(string name, Dictionary<string, ActionDelegate> actions, string href)
         {
             Name = name;
             Actions = actions;
+            Href = href;
         }
 
         public string Name { get; private set; }
+        public string Href { get; private set; }
 
     }
 }

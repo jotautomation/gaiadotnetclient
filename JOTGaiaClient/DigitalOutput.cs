@@ -12,7 +12,7 @@ namespace JOT.GaiaClient
         {
 
         }
-        public DigitalOutput(string name, Dictionary<string, ActionDelegate> actions) : base(name, actions)
+        public DigitalOutput(string name, Dictionary<string, ActionDelegate> actions, string href) : base(name, actions, href)
         {
         }
 

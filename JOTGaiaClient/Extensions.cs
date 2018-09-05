@@ -28,7 +28,7 @@ namespace JOT.GaiaClient
                     if (item.properties["name"] != "NA")
                     {
                         apps.Add(item.properties["name"], (T)Activator.CreateInstance(typeof(T), (string)item.properties["name"],
-                        GetActionsFromEntity(item)));
+                        GetActionsFromEntity(item), item.href));
                     }
                 }
             }
