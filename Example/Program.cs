@@ -22,9 +22,8 @@ namespace JOT.Client
 
             Console.WriteLine("State: " + client.State);
 
-            //Note! There is a bug on API here. Positions are on array thus we need "extra" [0] in the middle.
-            //This will be fixed someday
-            Console.WriteLine(r.Properties["position"][0]["x"]);
+            // This is how you get properties of application. For example here we get current position of X-axle of main robot.
+            Console.WriteLine(r.Properties["position"]["x"]);
 
             while (true)
             {
