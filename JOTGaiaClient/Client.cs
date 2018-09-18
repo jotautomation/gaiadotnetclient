@@ -18,6 +18,8 @@ namespace JOT.GaiaClient
         public IReadOnlyDictionary<string, Application<string>> Robots { get; private set; }
         public IReadOnlyDictionary<string, ActionDelegate> StateTriggers { get; private set; }
         public IReadOnlyDictionary<string, Application<string>> LightSources { get; private set; }
+        public IReadOnlyDictionary<string, Application<string>> AudioTool { get; private set; }
+
 
         public bool ReadyForTesting
         {
@@ -75,6 +77,7 @@ namespace JOT.GaiaClient
             StateApps = response.Data.GetApplications<Application<string>>("StatefulApplication");
             Robots = response.Data.GetApplications<Application<string>>("CncRobot");
             LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
+            AudioTool = response.Data.GetApplications<Application<string>>("AudioTool");
 
             request = new RestRequest("api", Method.GET);
 
