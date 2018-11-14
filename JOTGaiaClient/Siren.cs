@@ -44,6 +44,7 @@ namespace JOT.GaiaClient
     public class Field
     {
         public string name { get; set; }
+        public bool optional { get; set; }
         public string type { get; set; }
         public object value { get; set; }
     }
