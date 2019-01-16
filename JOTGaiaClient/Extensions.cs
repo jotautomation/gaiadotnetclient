@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Dynamic;
 using System.Net;
+using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace JOT.GaiaClient
 {
@@ -19,20 +21,23 @@ namespace JOT.GaiaClient
 
         public static IReadOnlyDictionary<string, T> GetApplications<T>(this Siren value, string type)
         {
-            var apps = new Dictionary<string, T>();
-
-            foreach (var item in value.entities)
+            Stopwatch getTime = new Stopwatch();
+            getTime.Start();
+            var apps = new ConcurrentDictionary<string, T>();
+            Parallel.ForEach(
+                value.entities,
+                (entitie) =>
             {
-                if (item.@class.Contains(type))
+                if (entitie.@class.Contains(type))
                 {
-                    if (item.properties["name"] != "NA")
+                    if (entitie.properties["name"] != "NA")
                     {
-                        apps.Add(item.properties["name"], (T)Activator.CreateInstance(typeof(T), (string)item.properties["name"],
-                        GetActionsFromEntity(item), item.href));
+                        var instance = (T)Activator.CreateInstance(typeof(T), (string)entitie.properties["name"], GetActionsFromEntity(entitie), entitie.href);
+                        apps.TryAdd(entitie.properties["name"], instance);
                     }
                 }
-            }
-
+            });
+            Trace.WriteLine(string.Format("GetApplications ({0}) processing time: {1}", type, getTime.Elapsed));
             return apps;
         }
 
@@ -59,7 +64,10 @@ namespace JOT.GaiaClient
 
             var actionDictionary = new Dictionary<string, ActionDelegate>();
 
-            foreach (var action in content.actions)
+            if (actions == null)
+                return actionDictionary;
+
+            foreach (var action in actions)
             {
                 actionDictionary.Add(action.name,
                     (Dictionary<string, object> UserDefinedFields, string plainText) =>

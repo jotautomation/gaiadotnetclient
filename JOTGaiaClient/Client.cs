@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace JOT.GaiaClient
@@ -72,12 +73,34 @@ namespace JOT.GaiaClient
 
             var response = (RestResponse<Siren>)Execute<Siren>(request);
 
-            Outputs = response.Data.GetApplications<DigitalOutput>("DigitalOutput");
-            Inputs = response.Data.GetApplications<DigitalInput>("DigitalInput");
-            StateApps = response.Data.GetApplications<Application<string>>("StatefulApplication");
-            Robots = response.Data.GetApplications<Application<string>>("CncRobot");
-            LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
-            AudioTool = response.Data.GetApplications<Application<string>>("AudioTool");
+            Thread[] apps = {
+                new Thread(() => {
+                    Outputs = response.Data.GetApplications<DigitalOutput>("DigitalOutput");
+                }),
+                new Thread(() => {
+                    Inputs = response.Data.GetApplications<DigitalInput>("DigitalInput");
+                }),
+                new Thread(() => {
+                    StateApps = response.Data.GetApplications<Application<string>>("StatefulApplication");
+                }),
+                new Thread(() => {
+                    Robots = response.Data.GetApplications<Application<string>>("CncRobot");
+                }),
+                new Thread(() => {
+                    LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
+                }),
+                new Thread(() => {
+                    LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
+                })};
+
+            foreach (var item in apps)
+            {
+                item.Start();
+            }
+            foreach (var item in apps)
+            {
+                item.Join();
+            }
 
             request = new RestRequest("api", Method.GET);
 

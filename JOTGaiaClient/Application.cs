@@ -32,7 +32,7 @@ namespace JOT.GaiaClient
         /// <param name="timeOut_ms">Timeout</param>
         /// <param name="pollInterval_ms">Poll interval</param>
         /// <returns>Returns true if state was reached before timeout.</returns>
-        public bool TryWaitState(T state, int timeOut_ms = 5000, int pollInterval_ms = 10)
+        public bool TryWaitState(T state, int timeOut_ms = 5000, int pollInterval_ms = 100)
         {
             var sw = new Stopwatch();
             sw.Start();
@@ -52,7 +52,7 @@ namespace JOT.GaiaClient
         /// <param name="state">State to wait</param>
         /// <param name="timeOut_ms">Timeout</param>
         /// <param name="pollInterval_ms">Poll interval</param>
-        public void WaitState(T state, int timeOut_ms = 5000, int pollInterval_ms = 10)
+        public void WaitState(T state, int timeOut_ms = 5000, int pollInterval_ms = 100)
         {
             if (!TryWaitState(state, timeOut_ms, pollInterval_ms))
                 throw new TimeoutException("Timeout while waiting " + state + " for " + this.Name + ". Current state: " + this.State);
