@@ -20,6 +20,10 @@ namespace JOT.GaiaClient
         public IReadOnlyDictionary<string, Application<string>> LightSources { get; private set; }
         public IReadOnlyDictionary<string, Application<string>> AudioTool { get; private set; }
 
+        public IReadOnlyDictionary<string, Application<string>> AudioRouter { get; private set; }
+        public IReadOnlyDictionary<string, Application<string>> WavePlayer { get; private set; }
+        public IReadOnlyDictionary<string, Application<string>> WaveRecorder { get; private set; }
+
 
         public bool ReadyForTesting
         {
@@ -78,6 +82,9 @@ namespace JOT.GaiaClient
             Robots = response.Data.GetApplications<Application<string>>("CncRobot");
             LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
             AudioTool = response.Data.GetApplications<Application<string>>("AudioTool");
+            AudioRouter = response.Data.GetApplications<Application<string>>("AudioRouter");
+            WavePlayer = response.Data.GetApplications<Application<string>>("WavePlayer");
+            WaveRecorder = response.Data.GetApplications<Application<string>>("WaveRecorder");
 
             request = new RestRequest("api", Method.GET);
 
