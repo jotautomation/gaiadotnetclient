@@ -11,19 +11,23 @@ namespace JOT.Client
         static void Main(string[] args)
         {
 
-            var client = new JOTGaiaClient("http://172.23.225.118:1234");
+            var client = new JOTGaiaClient("http://172.23.225.84:1234");
 
             client.Populate();
 
-            var o = client.Outputs;
-            var i = client.Inputs;
-            var a = client.StateApps;
-            var r = client.Robots["MainRobot"];
+            var StatefulApplications = client.StateApps;
+            var Robot = client.Robots["MainRobot"];
+            var WavePlayerDefault = client.WavePlayer["DefaultAudioOut"];
+            var WaveRecorderDefault = client.WaveRecorder["DefaultAudioIn"];
+
+            WaveRecorderDefault.Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
+            WavePlayerDefault.Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
 
             Console.WriteLine("State: " + client.State);
 
             // This is how you get properties of application. For example here we get current position of X-axle of main robot.
-            Console.WriteLine(r.Properties["position"]["x"]);
+            Console.WriteLine(Robot.Properties["position"]["x"]);
+
 
             while (true)
             {
@@ -55,9 +59,9 @@ namespace JOT.Client
             }
 
             // Change to FingerBase too. Note! Tool change can be defined also in G-code
-            r.Actions["changeTo-FingerBase"]();
+            Robot.Actions["changeTo-FingerBase"]();
 
-            r.Actions["cnc_run"](plainText:GcodeExample.GCode);
+            Robot.Actions["cnc_run"](plainText: GcodeExample.GCode);
 
             /*
              * // Here is example how to wait for application to go to certain state
@@ -70,20 +74,19 @@ namespace JOT.Client
             */
 
             // TODO: Add real application here
-            Console.WriteLine(a["RobotToolLock"].State);
+            Console.WriteLine(StatefulApplications["RobotToolLock"].State);
 
             Thread.Sleep(100);
 
-            a["SideButtonPresser"].Actions["set-Work"]();
+            StatefulApplications["SideButtonPresser"].Actions["set-Work"]();
 
-            Console.WriteLine(a["RobotToolLock"].State);
+            Console.WriteLine(StatefulApplications["RobotToolLock"].State);
 
-            o["Output1"].SetOutput(true);
 
-            Console.WriteLine(o["Output1"].State);
-            Console.WriteLine(a["MyStatefulApplication"].State);
+            Console.WriteLine(StatefulApplications["MyStatefulApplication"].State);
             Console.ReadLine();
         }
     }
 }
+
 

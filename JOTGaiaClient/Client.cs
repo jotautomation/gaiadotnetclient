@@ -21,6 +21,10 @@ namespace JOT.GaiaClient
         public IReadOnlyDictionary<string, Application<string>> LightSources { get; private set; }
         public IReadOnlyDictionary<string, Application<string>> AudioTool { get; private set; }
 
+        public IReadOnlyDictionary<string, Application<string>> AudioRouter { get; private set; }
+        public IReadOnlyDictionary<string, Application<string>> WavePlayer { get; private set; }
+        public IReadOnlyDictionary<string, Application<string>> WaveRecorder { get; private set; }
+
 
         public bool ReadyForTesting
         {
@@ -72,7 +76,6 @@ namespace JOT.GaiaClient
             request.AddHeader("Accept", "application/vnd.siren+json");
 
             var response = (RestResponse<Siren>)Execute<Siren>(request);
-
            
             var appLoadTasks = new Task[] {
                 Task.Run(() => {
@@ -91,8 +94,18 @@ namespace JOT.GaiaClient
                     LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
                 }),
                 Task.Run(() => {
-                    LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
+                    AudioTool = response.Data.GetApplications<Application<string>>("AudioTool");
+                }),
+                Task.Run(() => {
+                    AudioRouter = response.Data.GetApplications<Application<string>>("AudioRouter");
+                }),
+                Task.Run(() => {
+                    WavePlayer = response.Data.GetApplications<Application<string>>("WavePlayer");
+                }),
+                Task.Run(() => {
+                    WaveRecorder = response.Data.GetApplications<Application<string>>("WaveRecorder");
                 })};
+
 
             Task.WaitAll(appLoadTasks);
 
