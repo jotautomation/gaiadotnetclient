@@ -73,34 +73,28 @@ namespace JOT.GaiaClient
 
             var response = (RestResponse<Siren>)Execute<Siren>(request);
 
-            Thread[] apps = {
-                new Thread(() => {
+           
+            var appLoadTasks = new Task[] {
+                Task.Run(() => {
                     Outputs = response.Data.GetApplications<DigitalOutput>("DigitalOutput");
                 }),
-                new Thread(() => {
+                Task.Run(() => {
                     Inputs = response.Data.GetApplications<DigitalInput>("DigitalInput");
                 }),
-                new Thread(() => {
+                Task.Run(() => {
                     StateApps = response.Data.GetApplications<Application<string>>("StatefulApplication");
                 }),
-                new Thread(() => {
+                Task.Run(() => {
                     Robots = response.Data.GetApplications<Application<string>>("CncRobot");
                 }),
-                new Thread(() => {
+                Task.Run(() => {
                     LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
                 }),
-                new Thread(() => {
+                Task.Run(() => {
                     LightSources = response.Data.GetApplications<Application<string>>("LightSourceTool");
                 })};
 
-            foreach (var item in apps)
-            {
-                item.Start();
-            }
-            foreach (var item in apps)
-            {
-                item.Join();
-            }
+            Task.WaitAll(appLoadTasks);
 
             request = new RestRequest("api", Method.GET);
 
