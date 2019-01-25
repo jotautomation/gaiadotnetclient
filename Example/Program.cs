@@ -17,6 +17,11 @@ namespace JOT.Client
 
             var StatefulApplications = client.StateApps;
             var Robot = client.Robots["MainRobot"];
+            var WavePlayerDefault = client.WavePlayer["DefaultAudioOut"];
+            var WaveRecorderDefault = client.WaveRecorder["DefaultAudioIn"];
+
+            WaveRecorderDefault.Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
+            WavePlayerDefault.Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
 
             Console.WriteLine("State: " + client.State);
 
