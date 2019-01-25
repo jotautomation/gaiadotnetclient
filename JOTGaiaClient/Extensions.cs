@@ -24,19 +24,22 @@ namespace JOT.GaiaClient
             Stopwatch getTime = new Stopwatch();
             getTime.Start();
             var apps = new ConcurrentDictionary<string, T>();
-            Parallel.ForEach(
-                value.entities,
-                (entitie) =>
+            if (value?.entities != null)
             {
-                if (entitie.@class.Contains(type))
+                Parallel.ForEach(
+                    value.entities,
+                    (entitie) =>
                 {
-                    if (entitie.properties["name"] != "NA")
+                    if (entitie.@class.Contains(type))
                     {
-                        var instance = (T)Activator.CreateInstance(typeof(T), (string)entitie.properties["name"], GetActionsFromEntity(entitie), entitie.href);
-                        apps.TryAdd(entitie.properties["name"], instance);
+                        if (entitie.properties["name"] != "NA")
+                        {
+                            var instance = (T)Activator.CreateInstance(typeof(T), (string)entitie.properties["name"], GetActionsFromEntity(entitie), entitie.href);
+                            apps.TryAdd(entitie.properties["name"], instance);
+                        }
                     }
-                }
-            });
+                });
+            }
             Trace.WriteLine(string.Format("GetApplications ({0}) processing time: {1}", type, getTime.Elapsed));
             return apps;
         }
@@ -96,14 +99,14 @@ namespace JOT.GaiaClient
                                         obj.AddProperty(field.name, UserDefinedFields[field.name]);
                                     else if (field.value != null)
                                         obj.AddProperty(field.name, field.value);
-                                    else if(!field.optional)
+                                    else if (!field.optional)
                                         throw new Exception("Value of field missing");
 
                                 }
 
                                 actionRequest.AddBody(obj);
                             }
-                            
+
                         }
                         resp = actionClient.Execute<object>(actionRequest);
                         HandleResponse(resp);
