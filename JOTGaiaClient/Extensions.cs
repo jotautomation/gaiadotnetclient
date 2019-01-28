@@ -45,8 +45,12 @@ namespace JOT.GaiaClient
 
             //TODO: Validate response
             var content = (RestResponse<Siren>)client.Execute<Siren>(request);
-            var actionDictionary = GetActions(content.Data);
-            return actionDictionary;
+            if (content.StatusCode == HttpStatusCode.OK)
+            {
+                var actionDictionary = GetActions(content.Data);
+                return actionDictionary;
+            }
+            else return null;
         }
 
         private static Dictionary<string, ActionDelegate> GetActions(Siren content)

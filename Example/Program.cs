@@ -20,8 +20,8 @@ namespace JOT.Client
             var WavePlayerDefault = client.WavePlayer["DefaultAudioOut"];
             var WaveRecorderDefault = client.WaveRecorder["DefaultAudioIn"];
 
-            WaveRecorderDefault.Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
-            WavePlayerDefault.Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
+         //   WaveRecorderDefault.Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
+         //   WavePlayerDefault.Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
 
             Console.WriteLine("State: " + client.State);
 
@@ -50,16 +50,18 @@ namespace JOT.Client
                 {
                     Thread.Sleep(10);
                 }
+              //  StatefulApplications["LeftToolMagazine"].Actions["set-Work"]();
 
+                Robot.Actions["cnc_run"](plainText: GcodeExample.GCode);
+                Robot.WaitState("Ready", timeOut_ms:200000);
                 // Step 3: Test box is fully closed and we are ready for actual testing.
                 Console.WriteLine("Ready for testing!");
 
                 // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
-                client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
+               // client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
             }
 
             // Change to FingerBase too. Note! Tool change can be defined also in G-code
-            Robot.Actions["changeTo-FingerBase"]();
 
             Robot.Actions["cnc_run"](plainText: GcodeExample.GCode);
 
