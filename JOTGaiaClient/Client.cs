@@ -76,7 +76,12 @@ namespace JOT.GaiaClient
             request.AddHeader("Accept", "application/vnd.siren+json");
 
             var response = (RestResponse<Siren>)Execute<Siren>(request);
-           
+
+            if (!response.IsSuccessful)
+            {
+                throw response.ErrorException ?? new Exception("Unknown error when trying to connect to machine.");
+            }
+
             var appLoadTasks = new Task[] {
                 Task.Run(() => {
                     Outputs = response.Data.GetApplications<DigitalOutput>("DigitalOutput");
