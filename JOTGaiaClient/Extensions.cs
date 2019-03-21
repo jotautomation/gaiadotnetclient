@@ -14,36 +14,6 @@ namespace JOT.GaiaClient
 {
     public static class Extensions
     {
-        public static IReadOnlyDictionary<string, ActionDelegate> GetStateTriggers(this Siren value)
-        {
-            return GetActions(value);
-        }
-
-        public static IReadOnlyDictionary<string, T> GetApplications<T>(this Siren value, string type)
-        {
-            Stopwatch getTime = new Stopwatch();
-            getTime.Start();
-            var apps = new ConcurrentDictionary<string, T>();
-            if (value?.entities != null)
-            {
-                Parallel.ForEach(
-                    value.entities,
-                    (entitie) =>
-                {
-                    if (entitie.@class.Contains(type))
-                    {
-                        if (entitie.properties["name"] != "NA")
-                        {
-                            var instance = (T)Activator.CreateInstance(typeof(T), (string)entitie.properties["name"], GetActionsFromEntity(entitie), entitie.href);
-                            apps.TryAdd(entitie.properties["name"], instance);
-                        }
-                    }
-                });
-            }
-            Trace.WriteLine(string.Format("GetApplications ({0}) processing time: {1}", type, getTime.Elapsed));
-            return apps;
-        }
-
         public static Dictionary<string, ActionDelegate> GetActionsFromEntity(this Entity value)
         {
             var client = new RestClient(new Uri(value.href));
