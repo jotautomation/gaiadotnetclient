@@ -11,7 +11,7 @@
     <iconUrl>https://www.jotautomation.com/media/layout/img/logo-jot-color.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <releaseNotes>Add downloading of wave files </releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags></tags>
   </metadata>
