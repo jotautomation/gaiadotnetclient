@@ -20,6 +20,14 @@ namespace JOT.Client
             //Get state of the tester
             Console.WriteLine("State: " + client.State);
 
+            client.Applications["DefaultAudioIn"].Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
+
+            // Wait that recording is ready. TODO: implement real wait instead of sleep
+            Thread.Sleep(2500);
+
+            //Download wave as byte array
+            var rec = client.DownloadWave("testrecord.wav");
+
             // This is how you get properties of application. For example here we get current position of X-axle of main robot.
             Console.WriteLine(client.Applications["mainrobot"].Properties["position"]["x"]);
             #endregion

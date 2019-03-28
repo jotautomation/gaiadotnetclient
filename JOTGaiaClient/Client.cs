@@ -66,6 +66,13 @@ namespace JOT.GaiaClient
             myRestClient = new RestClient(baseUrl);
         }
 
+        public byte[] DownloadWave(string name)
+        {
+            var request = new RestRequest("api/waves/" + name, Method.GET);
+
+            return myRestClient.DownloadData(request);
+        }
+
         public void Populate()
         {
             var request = new RestRequest("api/applications", Method.GET);
