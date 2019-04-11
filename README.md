@@ -1,3 +1,24 @@
+# .NET Client library for JOT Automation Gaia platform machines
+
+## Installation
+
+Preferred way is to use [nuget](https://www.nuget.org/packages/JOT.GaiaClient/) package. 
+
+## Usage
+
+See example program [here](https://github.com/jotautomation/gaiadotnetclient/blob/master/Example/Program.cs).
+
+See API quick start bellow for more information about the API.
+
+
+On .NET client you will have applications on dictionary. Inside each application on the dictionary there is another dictionary containing the actions for the application. For simple actions you can use simply name of action to call it. For example `client.Applications["SideButtonPusher"].Actions["Push"]();` will activate the side button pusher. 
+
+For more complex action you need to add also some fields. So for example recording of wave (audio or other signal) you use this kind of command:  `client.Applications["WaveRecorder"].Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });` 
+
+Robot controlling is special case on that sense that the payload on API there is g-code in a plain text form. This is how you execute a robot run `client.Applications["MainRobot"].Actions["cnc_run"](plainText: "G-CODE AS PLAIN TEXT");`
+
+
+
 # JOT Gaia API quick start
 
 ## What it is?
