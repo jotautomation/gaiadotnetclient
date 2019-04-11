@@ -14,9 +14,6 @@ namespace JOT.Client
             // Connect to the test box
             var client = new JOTGaiaClient("http://ci.jot.local:1234");
 
-            // Fetch applications from the test box
-            client.Populate();
-
             //Get state of the tester
             Console.WriteLine("State: " + client.State);
 

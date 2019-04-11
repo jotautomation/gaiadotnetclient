@@ -59,11 +59,15 @@ namespace JOT.GaiaClient
         public JOTGaiaClient(string baseUrl)
         {
             myRestClient = new RestClient(baseUrl);
+            // Fetch applications from the test box
+            Populate();
         }
 
         public JOTGaiaClient(Uri baseUrl)
         {
             myRestClient = new RestClient(baseUrl);
+            // Fetch applications from the test box
+            Populate();
         }
 
         public byte[] DownloadWave(string name)
