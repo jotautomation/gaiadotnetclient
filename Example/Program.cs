@@ -86,7 +86,9 @@ namespace JOT.Client
 
 
                 // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
-                client.StateTriggers["Release"](new Dictionary<string, object> { { "testResult1", "pass" }, { "testResult2", "pass" }, { "testResult3", "fail" } });
+                // Here we have two DUTs. Let's set pass result for the DUT on right and fail result for the DUT on left.
+                // DUT is also application. Search type DutApplication from URL/api/applications to get names of DUTs.
+                client.StateTriggers["Release"](new Dictionary<string, object> { { "dut_right", "pass" }, { "dut_left", "fail" } });
                 #endregion
             }
             #endregion
