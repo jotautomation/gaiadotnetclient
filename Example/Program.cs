@@ -17,17 +17,12 @@ namespace JOT.Client
             //Get state of the tester
             Console.WriteLine("State: " + client.State);
 
-            client.Applications["DefaultAudioIn"].Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
-
-            // Wait that recording is ready. TODO: implement real wait instead of sleep
-            Thread.Sleep(2500);
-
-            //Download wave as byte array
-            var rec = client.DownloadWave("testrecord.wav");
-
             // This is how you get properties of application. For example here we get current position of X-axle of main robot.
             Console.WriteLine(client.Applications["mainrobot"].Properties["position"]["x"]);
             #endregion
+
+            // Send audio sweep to G5. See bellow how this is played.
+            client.UploadWave("sweep_10Hz_10000Hz_-3dBFS_1s.wav");
 
             #region test sequence
             while (true)
@@ -79,11 +74,29 @@ namespace JOT.Client
                 client.Applications["SideButtonPusher"].Actions["Release"]();
 
                 // Record audio
-                client.Applications["WaveRecorder"].Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
+                client.Applications["DefaultAudioIn"].Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
 
-                // Play audio
-                client.Applications["WavePlayer"].Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
+                client.Applications["DefaultAudioIn"].WaitState("Ready");
 
+                var rec1 = client.DownloadWave("testrecord1.wav");
+
+
+                // Play audio. sine_1000Hz_-3dBFS_3s.wav is included always.
+                client.Applications["DefaultAudioOut"].Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
+                client.Applications["DefaultAudioOut"].WaitState("Ready");
+
+                // Play audio file we sent earlier to G5
+                client.Applications["DefaultAudioOut"].Actions["play-wave"](new Dictionary<string, object> { { "filename", "sweep_10Hz_10000Hz_-3dBFS_1s.wav" } });
+                client.Applications["DefaultAudioOut"].WaitState("Ready");
+
+                // Play audio and record simultaneously
+                client.Applications["DefaultAudioInOut"].Actions["play-rec-wave"](
+                    new Dictionary<string, object> {
+                        { "play_filename", "sweep_10Hz_10000Hz_-3dBFS_1s.wav" },
+                        {"rec_filename", "testrecord2.wav"} });
+
+                client.Applications["DefaultAudioInOut"].WaitState("Ready");
+                var rec2 = client.DownloadWave("testrecord2.wav");
 
                 // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
                 // Here we have two DUTs. Let's set pass result for the DUT on right and fail result for the DUT on left.

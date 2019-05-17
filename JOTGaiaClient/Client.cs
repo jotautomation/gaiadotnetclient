@@ -70,11 +70,30 @@ namespace JOT.GaiaClient
             Populate();
         }
 
+        /// <summary>
+        /// Download wave file (.wav) from G5
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public byte[] DownloadWave(string name)
         {
             var request = new RestRequest("api/waves/" + name, Method.GET);
 
             return myRestClient.DownloadData(request);
+        }
+
+        /// <summary>
+        /// Upload wave file (.wav) to G5
+        /// </summary>
+        /// <param name="filePath"></param>
+        public void UploadWave(string filePath)
+        {
+            RestRequest restRequest = new RestRequest("api/waves/");
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.Method = Method.POST;
+            restRequest.AddHeader("Content-Type", "multipart/form-data");
+            restRequest.AddFile("content", filePath);
+            var response = myRestClient.Execute(restRequest);
         }
 
         public void Populate()
