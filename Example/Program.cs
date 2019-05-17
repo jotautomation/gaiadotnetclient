@@ -1,8 +1,8 @@
 ﻿using JOT.ClientExample;
 using JOT.GaiaClient;
 using System;
-using System.Collections.Generic;
 using System.Threading;
+using FieldsObj = System.Collections.Generic.Dictionary<string,object>;
 
 namespace JOT.Client
 {
@@ -74,7 +74,7 @@ namespace JOT.Client
                 client.Applications["SideButtonPusher"].Actions["Release"]();
 
                 // Record audio
-                client.Applications["DefaultAudioIn"].Actions["record-wave"](new Dictionary<string, object> { { "time_s", 2 }, { "filename", "testrecord.wav" } });
+                client.Applications["DefaultAudioIn"].Actions["record-wave"](new FieldsObj { { "time_s", 2 }, { "filename", "testrecord.wav" } });
 
                 client.Applications["DefaultAudioIn"].WaitState("Ready");
 
@@ -82,16 +82,16 @@ namespace JOT.Client
 
 
                 // Play audio. sine_1000Hz_-3dBFS_3s.wav is included always.
-                client.Applications["DefaultAudioOut"].Actions["play-wave"](new Dictionary<string, object> { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
+                client.Applications["DefaultAudioOut"].Actions["play-wave"](new FieldsObj { { "filename", "sine_1000Hz_-3dBFS_3s.wav" } });
                 client.Applications["DefaultAudioOut"].WaitState("Ready");
 
                 // Play audio file we sent earlier to G5
-                client.Applications["DefaultAudioOut"].Actions["play-wave"](new Dictionary<string, object> { { "filename", "sweep_10Hz_10000Hz_-3dBFS_1s.wav" } });
+                client.Applications["DefaultAudioOut"].Actions["play-wave"](new FieldsObj { { "filename", "sweep_10Hz_10000Hz_-3dBFS_1s.wav" } });
                 client.Applications["DefaultAudioOut"].WaitState("Ready");
 
                 // Play audio and record simultaneously
                 client.Applications["DefaultAudioInOut"].Actions["play-rec-wave"](
-                    new Dictionary<string, object> {
+                    new FieldsObj {
                         { "play_filename", "sweep_10Hz_10000Hz_-3dBFS_1s.wav" },
                         {"rec_filename", "testrecord2.wav"} });
 
@@ -101,7 +101,7 @@ namespace JOT.Client
                 // Step 4: Testing is ready and we release the DUT and give test result so that test box can indicate it to operator
                 // Here we have two DUTs. Let's set pass result for the DUT on right and fail result for the DUT on left.
                 // DUT is also application. Search type DutApplication from URL/api/applications to get names of DUTs.
-                client.StateTriggers["Release"](new Dictionary<string, object> { { "dut_right", "pass" }, { "dut_left", "fail" } });
+                client.StateTriggers["Release"](new FieldsObj { { "dut_right", "pass" }, { "dut_left", "fail" } });
                 #endregion
             }
             #endregion
