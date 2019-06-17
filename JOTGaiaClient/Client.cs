@@ -175,7 +175,7 @@ namespace JOT.GaiaClient
                                     else if (field.value != null)
                                         obj.AddProperty(field.name, field.value);
                                     else if (!field.optional)
-                                        throw new Exception("Value of field missing");
+                                        throw new ArgumentException("Value of field missing");
 
                                 }
 
