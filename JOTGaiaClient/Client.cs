@@ -88,11 +88,11 @@ namespace JOT.GaiaClient
         /// <param name="filePath"></param>
         public void UploadWave(string filePath)
         {
-            RestRequest restRequest = new RestRequest("api/waves/");
+            RestRequest restRequest = new RestRequest("api/waves");
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.Method = Method.POST;
-            restRequest.AddHeader("Content-Type", "multipart/form-data");
-            restRequest.AddFile("content", filePath);
+            restRequest.AddFile("file", filePath);
+            restRequest.AlwaysMultipartFormData = true;
             var response = myRestClient.Execute(restRequest);
         }
 
