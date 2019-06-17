@@ -164,6 +164,22 @@ namespace JOT.GaiaClient
                             actionRequest.AddHeader("Content", "application/vnd.siren+json");
                             actionRequest.RequestFormat = DataFormat.Json;
 
+                            foreach (var userfield in UserDefinedFields.Keys)
+                            {
+                                bool found = false;
+
+                                if (action.fields != null)
+                                    foreach (var actionfield in action.fields)
+                                    {
+                                        if (actionfield.name == userfield)
+                                            found = true;
+                                    }
+
+                                if (!found)
+                                    throw new ArgumentException("Field '" + userfield + "' not available at action '" + action.name +
+                                        "'. Check actions (with browser) from " + action.href.Replace("/" + action.name, ""));
+                            }
+
                             if (action.fields != null)
                             {
                                 var obj = new ExpandoObject();
