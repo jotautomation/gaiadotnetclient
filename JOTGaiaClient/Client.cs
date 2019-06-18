@@ -21,7 +21,7 @@ namespace JOT.GaiaClient
         {
             get
             {
-                if (this.State.Contains("Executing"))
+                if (this.State.Contains("Ready"))
                 {
                     return true;
                 }
@@ -34,7 +34,7 @@ namespace JOT.GaiaClient
         {
             get
             {
-                if (this.State.Contains("Active_ClosingTestBox"))
+                if (this.State.Contains("Closing"))
                 {
                     return true;
                 }
