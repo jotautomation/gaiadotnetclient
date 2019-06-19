@@ -21,7 +21,7 @@ namespace JOT.GaiaClient
         {
             get
             {
-                if (this.State.Contains("Ready"))
+                if (this.State == "Ready")
                 {
                     return true;
                 }
@@ -34,7 +34,7 @@ namespace JOT.GaiaClient
         {
             get
             {
-                if (this.State.Contains("Closing"))
+                if (this.State == "Closing")
                 {
                     return true;
                 }
