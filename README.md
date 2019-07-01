@@ -123,6 +123,10 @@ State actions do change state of main state machine. State actions are found fro
 
 If it is not allowed to execute the action, the action is listed under blocked actions instead of actions.
 
+## G5 State Machine
+
+![G5/gaia state machine](G5States.png "G5/gaia state machine")
+
 ## Client examples
 
 We have created free open-source clients to help the integration work. Find clients with example code here:
