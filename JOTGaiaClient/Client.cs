@@ -43,6 +43,14 @@ namespace JOT.GaiaClient
             }
         }
 
+        public void SilentMode(bool on)
+        {
+            if(on)
+                StateTriggers["SilenceOn"]();
+            else
+                StateTriggers["SilenceOff"]();
+        }
+
         public string InternalState
         {
             get
