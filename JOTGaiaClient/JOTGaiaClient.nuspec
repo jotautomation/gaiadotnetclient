@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>See history at https://github.com/jotautomation/gaiadotnetclient/commits/master </releaseNotes>
-    <icon>logo-jot-color.png</icon>
+    <!-->icon>logo-jot-color.png</icon-->
     <copyright>Copyright 2019</copyright>
     <tags></tags>    
   </metadata>
