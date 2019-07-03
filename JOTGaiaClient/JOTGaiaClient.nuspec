@@ -11,11 +11,13 @@
     <iconUrl>https://www.jotautomation.com/media/layout/img/logo-jot-color.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Be strict on state names</releaseNotes>
+    <releaseNotes>See history at https://github.com/jotautomation/gaiadotnetclient/commits/master </releaseNotes>
+    <icon>logo-jot-color.png</icon>
     <copyright>Copyright 2019</copyright>
     <tags></tags>    
   </metadata>
   <files>
      <file src="..\LICENS*" target="" />
+     <file src="logo-jot-color.png" target="" />
   </files>
 </package>
