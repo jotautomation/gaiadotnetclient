@@ -6,13 +6,16 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/jotautomation/gaiadotnetclient/blob/master/LICENSE</licenseUrl>
+    <license type="file">LICENSE</license>
     <projectUrl>https://github.com/jotautomation/gaiadotnetclient</projectUrl>
     <iconUrl>https://www.jotautomation.com/media/layout/img/logo-jot-color.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Be strict on state names</releaseNotes>
     <copyright>Copyright 2019</copyright>
-    <tags></tags>
+    <tags></tags>    
   </metadata>
+  <files>
+     <file src="..\LICENS*" target="" />
+  </files>
 </package>
