@@ -114,6 +114,7 @@ namespace JOT.Client
                 Console.WriteLine("Error code: " + ex.GaiaError.gaia_error_code);
                 Console.WriteLine("Http code: " + ex.GaiaError.http_code);
                 Console.WriteLine("Time: " + ex.GaiaError.time);
+                Console.WriteLine("Instructions: " + ex.GaiaError.instructions);
                 Console.WriteLine("Message: " + ex.GaiaError.message);
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
