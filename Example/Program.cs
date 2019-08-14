@@ -16,20 +16,11 @@ namespace JOT.Client
                 // Connect to the test box
                 var client = new JOTGaiaClient("http://ci.jot.local:1234");
 
-                // Silent mode on
-                client.SilentMode(true);
-
-                // Silen mode off
-                client.SilentMode(false);
-
-
-                client.Applications["LightDetectorMechanics_right"].Actions["set-OutputsOff"]();
-                client.Applications["LightDetectorMechanics_left"].Actions["set-OutputsOff"]();
                 //Get state of the tester
                 Console.WriteLine("State: " + client.State);
 
                 // This is how you get properties of application. For example here we get current position of X-axle of main robot.
-                //    Console.WriteLine(client.Applications["mainrobot"].Properties["position"]["x"]);
+                Console.WriteLine(client.Applications["mainrobot"].Properties["position"]["x"]);
                 #endregion
 
                 // Send audio sweep to G5. See bellow how this is played.
@@ -60,7 +51,6 @@ namespace JOT.Client
                     {
                         Thread.Sleep(10);
                     }
-
 
                     // Step 3: Test box is fully closed and we are ready for actual testing.
                     Console.WriteLine("Ready for testing!");
@@ -117,7 +107,6 @@ namespace JOT.Client
                     #endregion
                 }
                 #endregion
-
             }
             catch (GaiaClientException ex)
             {
