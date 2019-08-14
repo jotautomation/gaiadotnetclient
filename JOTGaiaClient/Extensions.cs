@@ -79,7 +79,7 @@ namespace JOT.GaiaClient
 
                         }
                         resp = actionClient.Execute<object>(actionRequest);
-                        HandleResponse(resp);
+                        JOTGaiaClient.HandleResponse(resp);
 
                         if (resp.ContentType.Contains("json"))
                             return resp.Data;
@@ -93,18 +93,6 @@ namespace JOT.GaiaClient
 
             return actionDictionary;
         }
-
-        private static void HandleResponse(IRestResponse<object> resp)
-        {
-            if (resp.StatusCode != HttpStatusCode.OK)
-            {
-                if (resp.ErrorException != null)
-                    throw resp.ErrorException;
-                throw new Exception("Request failed. Status " + resp.StatusCode);
-            }
-        }
-
-
 
         public static Method ToRestSharpMethod(this string value)
         {

@@ -45,7 +45,7 @@ namespace JOT.GaiaClient
 
         public void SilentMode(bool on)
         {
-            if(on)
+            if (on)
                 StateTriggers["SilenceOn"]();
             else
                 StateTriggers["SilenceOff"]();
@@ -237,15 +237,56 @@ namespace JOT.GaiaClient
             return actionDictionary;
         }
 
-        private static void HandleResponse(IRestResponse<object> resp)
+        internal static void HandleResponse(IRestResponse<object> resp)
         {
             if (resp.StatusCode != HttpStatusCode.OK)
             {
                 if (resp.ErrorException != null)
                     throw resp.ErrorException;
-                throw new Exception("Request failed. Status " + resp.StatusCode);
+                if (!string.IsNullOrEmpty(resp.Content))
+                {
+                    throw new GaiaClientException(GaiaError.FromDictionary((Dictionary<string, object>)resp.Data));
+                }
+                else
+                    throw new Exception("Request failed. Status " + resp.StatusCode);
             }
         }
-
     }
+
+    [Serializable]
+    public class GaiaClientException : Exception
+    {
+        public GaiaError GaiaError;
+        public GaiaClientException(GaiaError error) : base(error.message)
+        {
+            this.GaiaError = error;
+        }
+        public GaiaClientException(string message) : base(message) { }
+        public GaiaClientException(string message, Exception inner) : base(message, inner) { }
+        protected GaiaClientException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
+
+    public class GaiaError
+    {
+        public string message { get; private set; }
+        public string time { get; private set; }
+        public string instructions { get; private set; }
+        public string http_code { get; private set; }
+        public string gaia_error_code { get; private set; }
+
+        public static GaiaError FromDictionary(Dictionary<string, object> dict)
+        {
+            return new GaiaError()
+            {
+                message = (string)dict["message"],
+                gaia_error_code = (string)dict["gaia_error_code"],
+                http_code = dict["http_code"].ToString(),
+                instructions = (string)dict["instructions"],
+                time = (string)dict["time"]
+            };
+        }
+    }
+
 }
