@@ -11,12 +11,36 @@ using System.Threading.Tasks;
 
 namespace JOT.GaiaClient
 {
+    /// <summary>
+    /// Delegate that defines action to be executed on application
+    /// </summary>
+    /// <param name="fields">Named fields that will be converted to JSON fields</param>
+    /// <param name="plainText">Plain text body of the HTTP request</param>
+    /// <returns></returns>
     public delegate object ActionDelegate(Dictionary<string, object> fields = null, string plainText = null);
+
+    /// <summary>
+    /// Client implementation for JOT Automation gaia platform machines
+    /// </summary>
     public class JOTGaiaClient
     {
+        /// <summary>
+        /// List of applications on the machine. List wil be populated when
+        /// client connects to the machine.
+        /// </summary>
         public Dictionary<string, Application<string>> Applications { get; private set; }
+
+        /// <summary>
+        /// List of state triggers. These are used to tell the machine that test
+        /// is ready etc.
+        /// </summary>
         public IReadOnlyDictionary<string, ActionDelegate> StateTriggers { get; private set; }
 
+
+        /// <summary>
+        /// Return true if machine is ready for testing i.e. in ready state.
+        /// Any test activity may be executed on this state.
+        /// </summary>
         public bool ReadyForTesting
         {
             get
@@ -30,6 +54,11 @@ namespace JOT.GaiaClient
             }
         }
 
+        /// <summary>
+        /// Returns true if test box is closing. Some application actions
+        /// are available. Robot cannot be controlled yet and test box is not
+        /// RF or Audio shielded.
+        /// </summary>
         public bool TestBoxClosing
         {
             get
@@ -43,6 +72,11 @@ namespace JOT.GaiaClient
             }
         }
 
+        /// <summary>
+        /// All devices that can interfere audio or rf measurements
+        /// are turned off
+        /// </summary>
+        /// <param name="on"></param>
         public void SilentMode(bool on)
         {
             if (on)
@@ -51,6 +85,11 @@ namespace JOT.GaiaClient
                 StateTriggers["SilenceOff"]();
         }
 
+        /// <summary>
+        /// Returns internal state of the machine. 
+        /// This should be rarely needed,
+        /// Use more convenient State, ReadyForTesting() and TestBoxClosing() instead
+        /// </summary>
         public string InternalState
         {
             get
@@ -64,6 +103,10 @@ namespace JOT.GaiaClient
             }
         }
 
+        /// <summary>
+        /// Returns main state of the machine.
+        /// See explanation at https://github.com/jotautomation/gaiadotnetclient#g5-states
+        /// </summary>
         public string State
         {
             get
@@ -77,6 +120,11 @@ namespace JOT.GaiaClient
             }
         }
         RestClient myRestClient;
+
+        /// <summary>
+        /// Client implementation for JOT Automation gaia platform machines
+        /// </summary>
+        /// <param name="baseUrl">URL for the controlled machine</param>
         public JOTGaiaClient(string baseUrl)
         {
             myRestClient = new RestClient(baseUrl);
@@ -84,6 +132,10 @@ namespace JOT.GaiaClient
             Populate();
         }
 
+        /// <summary>
+        /// Client implementation for JOT Automation gaia platform machines
+        /// </summary>
+        /// <param name="baseUrl">URL for the controlled machin</param>
         public JOTGaiaClient(Uri baseUrl)
         {
             myRestClient = new RestClient(baseUrl);

@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace JOT.GaiaClient
 {
+    /// <summary>
+    /// Everything you can control on the machine is application. 
+    /// Moving parts on mechanics, robots, electronics...
+    /// </summary>
+    /// <typeparam name="T">Type of the application(debrecated, everything is just application)</typeparam>
     public class Application<T> : ApplicationBase
     {
         public Application()
@@ -63,6 +68,9 @@ namespace JOT.GaiaClient
         { }
     }
 
+    /// <summary>
+    /// Base class for applications. See Application<T> class.
+    /// </summary>
     public class ApplicationBase
     {
         public Dictionary<string, ActionDelegate> Actions { get; private set; }
@@ -94,7 +102,14 @@ namespace JOT.GaiaClient
             Href = href;
         }
 
+        /// <summary>
+        /// Name of the application
+        /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Link to the application
+        /// </summary>
         public string Href { get; private set; }
 
     }
