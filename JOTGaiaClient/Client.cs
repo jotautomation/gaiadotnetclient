@@ -169,7 +169,7 @@ namespace JOT.GaiaClient
             var response = myRestClient.Execute(restRequest);
         }
 
-        public void Populate()
+        void Populate()
         {
             var request = new RestRequest("api/applications", Method.GET);
 
