@@ -13,11 +13,13 @@ namespace JOT.GaiaClient
     /// Everything you can control on the machine is application. 
     /// Moving parts on mechanics, robots, electronics...
     /// </summary>
-    public class Application : ApplicationBase
+    public class Application
     {
-        public Application()
+        public Application(string name, Dictionary<string, ActionDelegate> actions, string href)
         {
-
+            Name = name;
+            Actions = actions;
+            Href = href;
         }
 
         public string State
@@ -28,6 +30,33 @@ namespace JOT.GaiaClient
                 return resp["value"].ToString();                
             }
         }
+
+        public Dictionary<string, ActionDelegate> Actions { get; private set; }
+        public Dictionary<string, dynamic> Properties
+        {
+            get
+            {
+                var client = new RestClient(new Uri(Href));
+                var request = new RestRequest("", Method.GET);
+
+                request.AddHeader("Accept", "application/vnd.siren+json");
+
+                //TODO: Validate response
+                var content = (RestResponse<Entity>)client.Execute<Entity>(request);
+               
+                return content.Data.properties;
+            }
+        }
+
+        /// <summary>
+        /// Name of the application
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Link to the application
+        /// </summary>
+        public string Href { get; private set; }
 
         /// <summary>
         /// Wait for state.
@@ -61,55 +90,6 @@ namespace JOT.GaiaClient
             if (!TryWaitState(state, timeOut_ms, pollInterval_ms))
                 throw new TimeoutException("Timeout while waiting " + state + " for " + this.Name + ". Current state: " + this.State);
         }
-
-        public Application(string name, Dictionary<string, ActionDelegate> actions, string href)
-            : base(name, actions, href)
-        { }
-    }
-
-    /// <summary>
-    /// Base class for applications. See Application<T> class.
-    /// </summary>
-    public class ApplicationBase
-    {
-        public Dictionary<string, ActionDelegate> Actions { get; private set; }
-        public Dictionary<string, dynamic> Properties
-        {
-            get
-            {
-                var client = new RestClient(new Uri(Href));
-                var request = new RestRequest("", Method.GET);
-
-                request.AddHeader("Accept", "application/vnd.siren+json");
-
-                //TODO: Validate response
-                var content = (RestResponse<Entity>)client.Execute<Entity>(request);
-               
-                return content.Data.properties;
-            }
-        }
-
-        public ApplicationBase()
-        {
-
-        }
-
-        public ApplicationBase(string name, Dictionary<string, ActionDelegate> actions, string href)
-        {
-            Name = name;
-            Actions = actions;
-            Href = href;
-        }
-
-        /// <summary>
-        /// Name of the application
-        /// </summary>
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Link to the application
-        /// </summary>
-        public string Href { get; private set; }
 
     }
 }
