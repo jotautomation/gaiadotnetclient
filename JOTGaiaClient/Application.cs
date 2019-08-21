@@ -14,14 +14,17 @@ namespace JOT.GaiaClient
     /// Moving parts on mechanics, robots, electronics...
     /// </summary>
     public class Application
-    {
-        public Application(string name, Dictionary<string, ActionDelegate> actions, string href)
+    {        
+        internal Application(string name, Dictionary<string, ActionDelegate> actions, string href)
         {
             Name = name;
             Actions = actions;
             Href = href;
         }
 
+        /// <summary>
+        /// Returns state if the application. For stateful application state, for IO value of the IO and so on...
+        /// </summary>
         public string State
         {
             get
@@ -31,7 +34,14 @@ namespace JOT.GaiaClient
             }
         }
 
+        /// <summary>
+        /// All actions that application can perform
+        /// </summary>
         public Dictionary<string, ActionDelegate> Actions { get; private set; }
+
+        /// <summary>
+        /// Lists all properties of the application
+        /// </summary>
         public Dictionary<string, dynamic> Properties
         {
             get

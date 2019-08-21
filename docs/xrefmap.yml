@@ -13,172 +13,103 @@ references:
   commentId: T:JOT.GaiaClient.ActionDelegate
   fullName: JOT.GaiaClient.ActionDelegate
   nameWithType: ActionDelegate
-- uid: JOT.GaiaClient.Application`1
-  name: Application<T>
-  href: api/JOT.GaiaClient.Application-1.html
-  commentId: T:JOT.GaiaClient.Application`1
-  name.vb: Application(Of T)
-  fullName: JOT.GaiaClient.Application<T>
-  fullName.vb: JOT.GaiaClient.Application(Of T)
-  nameWithType: Application<T>
-  nameWithType.vb: Application(Of T)
-- uid: JOT.GaiaClient.Application`1.#ctor
-  name: Application()
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1__ctor
-  commentId: M:JOT.GaiaClient.Application`1.#ctor
-  fullName: JOT.GaiaClient.Application<T>.Application()
-  fullName.vb: JOT.GaiaClient.Application(Of T).Application()
-  nameWithType: Application<T>.Application()
-  nameWithType.vb: Application(Of T).Application()
-- uid: JOT.GaiaClient.Application`1.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,JOT.GaiaClient.ActionDelegate},System.String)
-  name: Application(String, Dictionary<String, ActionDelegate>, String)
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1__ctor_System_String_System_Collections_Generic_Dictionary_System_String_JOT_GaiaClient_ActionDelegate__System_String_
-  commentId: M:JOT.GaiaClient.Application`1.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,JOT.GaiaClient.ActionDelegate},System.String)
-  name.vb: Application(String, Dictionary(Of String, ActionDelegate), String)
-  fullName: JOT.GaiaClient.Application<T>.Application(System.String, System.Collections.Generic.Dictionary<System.String, JOT.GaiaClient.ActionDelegate>, System.String)
-  fullName.vb: JOT.GaiaClient.Application(Of T).Application(System.String, System.Collections.Generic.Dictionary(Of System.String, JOT.GaiaClient.ActionDelegate), System.String)
-  nameWithType: Application<T>.Application(String, Dictionary<String, ActionDelegate>, String)
-  nameWithType.vb: Application(Of T).Application(String, Dictionary(Of String, ActionDelegate), String)
-- uid: JOT.GaiaClient.Application`1.#ctor*
+- uid: JOT.GaiaClient.Application
   name: Application
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1__ctor_
-  commentId: Overload:JOT.GaiaClient.Application`1.#ctor
+  href: api/JOT.GaiaClient.Application.html
+  commentId: T:JOT.GaiaClient.Application
+  fullName: JOT.GaiaClient.Application
+  nameWithType: Application
+- uid: JOT.GaiaClient.Application.Actions
+  name: Actions
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Actions
+  commentId: P:JOT.GaiaClient.Application.Actions
+  fullName: JOT.GaiaClient.Application.Actions
+  nameWithType: Application.Actions
+- uid: JOT.GaiaClient.Application.Actions*
+  name: Actions
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Actions_
+  commentId: Overload:JOT.GaiaClient.Application.Actions
   isSpec: "True"
-  fullName: JOT.GaiaClient.Application<T>.Application
-  fullName.vb: JOT.GaiaClient.Application(Of T).Application
-  nameWithType: Application<T>.Application
-  nameWithType.vb: Application(Of T).Application
-- uid: JOT.GaiaClient.Application`1.State
-  name: State
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1_State
-  commentId: P:JOT.GaiaClient.Application`1.State
-  fullName: JOT.GaiaClient.Application<T>.State
-  fullName.vb: JOT.GaiaClient.Application(Of T).State
-  nameWithType: Application<T>.State
-  nameWithType.vb: Application(Of T).State
-- uid: JOT.GaiaClient.Application`1.State*
-  name: State
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1_State_
-  commentId: Overload:JOT.GaiaClient.Application`1.State
+  fullName: JOT.GaiaClient.Application.Actions
+  nameWithType: Application.Actions
+- uid: JOT.GaiaClient.Application.Href
+  name: Href
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Href
+  commentId: P:JOT.GaiaClient.Application.Href
+  fullName: JOT.GaiaClient.Application.Href
+  nameWithType: Application.Href
+- uid: JOT.GaiaClient.Application.Href*
+  name: Href
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Href_
+  commentId: Overload:JOT.GaiaClient.Application.Href
   isSpec: "True"
-  fullName: JOT.GaiaClient.Application<T>.State
-  fullName.vb: JOT.GaiaClient.Application(Of T).State
-  nameWithType: Application<T>.State
-  nameWithType.vb: Application(Of T).State
-- uid: JOT.GaiaClient.Application`1.TryWaitState(`0,System.Int32,System.Int32)
-  name: TryWaitState(T, Int32, Int32)
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1_TryWaitState__0_System_Int32_System_Int32_
-  commentId: M:JOT.GaiaClient.Application`1.TryWaitState(`0,System.Int32,System.Int32)
-  fullName: JOT.GaiaClient.Application<T>.TryWaitState(T, System.Int32, System.Int32)
-  fullName.vb: JOT.GaiaClient.Application(Of T).TryWaitState(T, System.Int32, System.Int32)
-  nameWithType: Application<T>.TryWaitState(T, Int32, Int32)
-  nameWithType.vb: Application(Of T).TryWaitState(T, Int32, Int32)
-- uid: JOT.GaiaClient.Application`1.TryWaitState*
+  fullName: JOT.GaiaClient.Application.Href
+  nameWithType: Application.Href
+- uid: JOT.GaiaClient.Application.Name
+  name: Name
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Name
+  commentId: P:JOT.GaiaClient.Application.Name
+  fullName: JOT.GaiaClient.Application.Name
+  nameWithType: Application.Name
+- uid: JOT.GaiaClient.Application.Name*
+  name: Name
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Name_
+  commentId: Overload:JOT.GaiaClient.Application.Name
+  isSpec: "True"
+  fullName: JOT.GaiaClient.Application.Name
+  nameWithType: Application.Name
+- uid: JOT.GaiaClient.Application.Properties
+  name: Properties
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Properties
+  commentId: P:JOT.GaiaClient.Application.Properties
+  fullName: JOT.GaiaClient.Application.Properties
+  nameWithType: Application.Properties
+- uid: JOT.GaiaClient.Application.Properties*
+  name: Properties
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_Properties_
+  commentId: Overload:JOT.GaiaClient.Application.Properties
+  isSpec: "True"
+  fullName: JOT.GaiaClient.Application.Properties
+  nameWithType: Application.Properties
+- uid: JOT.GaiaClient.Application.State
+  name: State
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_State
+  commentId: P:JOT.GaiaClient.Application.State
+  fullName: JOT.GaiaClient.Application.State
+  nameWithType: Application.State
+- uid: JOT.GaiaClient.Application.State*
+  name: State
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_State_
+  commentId: Overload:JOT.GaiaClient.Application.State
+  isSpec: "True"
+  fullName: JOT.GaiaClient.Application.State
+  nameWithType: Application.State
+- uid: JOT.GaiaClient.Application.TryWaitState(System.String,System.Int32,System.Int32)
+  name: TryWaitState(String, Int32, Int32)
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_TryWaitState_System_String_System_Int32_System_Int32_
+  commentId: M:JOT.GaiaClient.Application.TryWaitState(System.String,System.Int32,System.Int32)
+  fullName: JOT.GaiaClient.Application.TryWaitState(System.String, System.Int32, System.Int32)
+  nameWithType: Application.TryWaitState(String, Int32, Int32)
+- uid: JOT.GaiaClient.Application.TryWaitState*
   name: TryWaitState
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1_TryWaitState_
-  commentId: Overload:JOT.GaiaClient.Application`1.TryWaitState
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_TryWaitState_
+  commentId: Overload:JOT.GaiaClient.Application.TryWaitState
   isSpec: "True"
-  fullName: JOT.GaiaClient.Application<T>.TryWaitState
-  fullName.vb: JOT.GaiaClient.Application(Of T).TryWaitState
-  nameWithType: Application<T>.TryWaitState
-  nameWithType.vb: Application(Of T).TryWaitState
-- uid: JOT.GaiaClient.Application`1.WaitState(`0,System.Int32,System.Int32)
-  name: WaitState(T, Int32, Int32)
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1_WaitState__0_System_Int32_System_Int32_
-  commentId: M:JOT.GaiaClient.Application`1.WaitState(`0,System.Int32,System.Int32)
-  fullName: JOT.GaiaClient.Application<T>.WaitState(T, System.Int32, System.Int32)
-  fullName.vb: JOT.GaiaClient.Application(Of T).WaitState(T, System.Int32, System.Int32)
-  nameWithType: Application<T>.WaitState(T, Int32, Int32)
-  nameWithType.vb: Application(Of T).WaitState(T, Int32, Int32)
-- uid: JOT.GaiaClient.Application`1.WaitState*
+  fullName: JOT.GaiaClient.Application.TryWaitState
+  nameWithType: Application.TryWaitState
+- uid: JOT.GaiaClient.Application.WaitState(System.String,System.Int32,System.Int32)
+  name: WaitState(String, Int32, Int32)
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_WaitState_System_String_System_Int32_System_Int32_
+  commentId: M:JOT.GaiaClient.Application.WaitState(System.String,System.Int32,System.Int32)
+  fullName: JOT.GaiaClient.Application.WaitState(System.String, System.Int32, System.Int32)
+  nameWithType: Application.WaitState(String, Int32, Int32)
+- uid: JOT.GaiaClient.Application.WaitState*
   name: WaitState
-  href: api/JOT.GaiaClient.Application-1.html#JOT_GaiaClient_Application_1_WaitState_
-  commentId: Overload:JOT.GaiaClient.Application`1.WaitState
+  href: api/JOT.GaiaClient.Application.html#JOT_GaiaClient_Application_WaitState_
+  commentId: Overload:JOT.GaiaClient.Application.WaitState
   isSpec: "True"
-  fullName: JOT.GaiaClient.Application<T>.WaitState
-  fullName.vb: JOT.GaiaClient.Application(Of T).WaitState
-  nameWithType: Application<T>.WaitState
-  nameWithType.vb: Application(Of T).WaitState
-- uid: JOT.GaiaClient.ApplicationBase
-  name: ApplicationBase
-  href: api/JOT.GaiaClient.ApplicationBase.html
-  commentId: T:JOT.GaiaClient.ApplicationBase
-  fullName: JOT.GaiaClient.ApplicationBase
-  nameWithType: ApplicationBase
-- uid: JOT.GaiaClient.ApplicationBase.#ctor
-  name: ApplicationBase()
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase__ctor
-  commentId: M:JOT.GaiaClient.ApplicationBase.#ctor
-  fullName: JOT.GaiaClient.ApplicationBase.ApplicationBase()
-  nameWithType: ApplicationBase.ApplicationBase()
-- uid: JOT.GaiaClient.ApplicationBase.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,JOT.GaiaClient.ActionDelegate},System.String)
-  name: ApplicationBase(String, Dictionary<String, ActionDelegate>, String)
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase__ctor_System_String_System_Collections_Generic_Dictionary_System_String_JOT_GaiaClient_ActionDelegate__System_String_
-  commentId: M:JOT.GaiaClient.ApplicationBase.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,JOT.GaiaClient.ActionDelegate},System.String)
-  name.vb: ApplicationBase(String, Dictionary(Of String, ActionDelegate), String)
-  fullName: JOT.GaiaClient.ApplicationBase.ApplicationBase(System.String, System.Collections.Generic.Dictionary<System.String, JOT.GaiaClient.ActionDelegate>, System.String)
-  fullName.vb: JOT.GaiaClient.ApplicationBase.ApplicationBase(System.String, System.Collections.Generic.Dictionary(Of System.String, JOT.GaiaClient.ActionDelegate), System.String)
-  nameWithType: ApplicationBase.ApplicationBase(String, Dictionary<String, ActionDelegate>, String)
-  nameWithType.vb: ApplicationBase.ApplicationBase(String, Dictionary(Of String, ActionDelegate), String)
-- uid: JOT.GaiaClient.ApplicationBase.#ctor*
-  name: ApplicationBase
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase__ctor_
-  commentId: Overload:JOT.GaiaClient.ApplicationBase.#ctor
-  isSpec: "True"
-  fullName: JOT.GaiaClient.ApplicationBase.ApplicationBase
-  nameWithType: ApplicationBase.ApplicationBase
-- uid: JOT.GaiaClient.ApplicationBase.Actions
-  name: Actions
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Actions
-  commentId: P:JOT.GaiaClient.ApplicationBase.Actions
-  fullName: JOT.GaiaClient.ApplicationBase.Actions
-  nameWithType: ApplicationBase.Actions
-- uid: JOT.GaiaClient.ApplicationBase.Actions*
-  name: Actions
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Actions_
-  commentId: Overload:JOT.GaiaClient.ApplicationBase.Actions
-  isSpec: "True"
-  fullName: JOT.GaiaClient.ApplicationBase.Actions
-  nameWithType: ApplicationBase.Actions
-- uid: JOT.GaiaClient.ApplicationBase.Href
-  name: Href
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Href
-  commentId: P:JOT.GaiaClient.ApplicationBase.Href
-  fullName: JOT.GaiaClient.ApplicationBase.Href
-  nameWithType: ApplicationBase.Href
-- uid: JOT.GaiaClient.ApplicationBase.Href*
-  name: Href
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Href_
-  commentId: Overload:JOT.GaiaClient.ApplicationBase.Href
-  isSpec: "True"
-  fullName: JOT.GaiaClient.ApplicationBase.Href
-  nameWithType: ApplicationBase.Href
-- uid: JOT.GaiaClient.ApplicationBase.Name
-  name: Name
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Name
-  commentId: P:JOT.GaiaClient.ApplicationBase.Name
-  fullName: JOT.GaiaClient.ApplicationBase.Name
-  nameWithType: ApplicationBase.Name
-- uid: JOT.GaiaClient.ApplicationBase.Name*
-  name: Name
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Name_
-  commentId: Overload:JOT.GaiaClient.ApplicationBase.Name
-  isSpec: "True"
-  fullName: JOT.GaiaClient.ApplicationBase.Name
-  nameWithType: ApplicationBase.Name
-- uid: JOT.GaiaClient.ApplicationBase.Properties
-  name: Properties
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Properties
-  commentId: P:JOT.GaiaClient.ApplicationBase.Properties
-  fullName: JOT.GaiaClient.ApplicationBase.Properties
-  nameWithType: ApplicationBase.Properties
-- uid: JOT.GaiaClient.ApplicationBase.Properties*
-  name: Properties
-  href: api/JOT.GaiaClient.ApplicationBase.html#JOT_GaiaClient_ApplicationBase_Properties_
-  commentId: Overload:JOT.GaiaClient.ApplicationBase.Properties
-  isSpec: "True"
-  fullName: JOT.GaiaClient.ApplicationBase.Properties
-  nameWithType: ApplicationBase.Properties
+  fullName: JOT.GaiaClient.Application.WaitState
+  nameWithType: Application.WaitState
 - uid: JOT.GaiaClient.GaiaClientException
   name: GaiaClientException
   href: api/JOT.GaiaClient.GaiaClientException.html
