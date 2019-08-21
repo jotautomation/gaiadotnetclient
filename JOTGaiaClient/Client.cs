@@ -28,7 +28,7 @@ namespace JOT.GaiaClient
         /// List of applications on the machine. List wil be populated when
         /// client connects to the machine.
         /// </summary>
-        public Dictionary<string, Application<string>> Applications { get; private set; }
+        public Dictionary<string, Application> Applications { get; private set; }
 
         /// <summary>
         /// List of state triggers. These are used to tell the machine that test
@@ -181,7 +181,7 @@ namespace JOT.GaiaClient
             {
                 throw response.ErrorException ?? new Exception("Unknown error when trying to connect to machine.");
             }
-            Applications = new Dictionary<string, Application<string>>();
+            Applications = new Dictionary<string, Application>();
             foreach (var entity in response.Data.entities)
             {
 
@@ -192,7 +192,7 @@ namespace JOT.GaiaClient
 
                 //TODO: Validate response
                 var content = (RestResponse<Siren>)client.Execute<Siren>(entity_request);
-                var app = (Application<string>)Activator.CreateInstance(typeof(Application<string>), (string)entity.properties["name"], GetActions(content.Data), entity.href);
+                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data), entity.href);
                 Applications[entity.properties["name"]] = app;
             }
 
