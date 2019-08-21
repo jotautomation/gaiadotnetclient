@@ -1,0 +1,213 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/work/gaiadotnetclient/JOTGaiaClient",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "rlnXgpzDVpbQjbdp98CpBg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "IBSliRmLLKGg+amwHADVig=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "t7iiFrmuYmrKWisdq+lN6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "FDK8VNKwkKbwzhUdz7cHmQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.ActionDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.ActionDelegate.html",
+          "hash": "SlP1GkbF9fbdmkRJnJ4GRA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.Application-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.Application-1.html",
+          "hash": "sX/EoJ+oyYbScAzPGKPXyA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.ApplicationBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.ApplicationBase.html",
+          "hash": "8G3pVzKtH2mVxWUdtyOz6g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.GaiaClientException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.GaiaClientException.html",
+          "hash": "0WBaDSURtlZffI/oDvLGKw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.GaiaError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.GaiaError.html",
+          "hash": "LwPRir6euc6bNDaL3VJ0ag=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.JOTGaiaClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.JOTGaiaClient.html",
+          "hash": "vKILvOLWaezz9A6FleHZEQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.html",
+          "hash": "WjTovgG328r+1aSBxsPaHA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "eOY7LnYkYE/g2wo9JYOwcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "Sg+nKmnHP++YKMT39ruhpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 7,
+          "skipped_file_count": 7
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
