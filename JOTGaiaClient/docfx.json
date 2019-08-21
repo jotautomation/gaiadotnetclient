@@ -1,4 +1,4 @@
-{
+﻿{
   "metadata": [
     {
       "src": [
@@ -29,7 +29,6 @@
       {
         "files": [
           "api/*.md",
-          "articles/**.md",
           "toc.yml",
           "*.md"
         ],
@@ -42,7 +41,8 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "logo-jot-color.png",
+          "jot_favicon.ico"
         ],
         "exclude": [
           "obj/**",
@@ -63,7 +63,16 @@
     ],
     "dest": "../docs",
     "template": [
-      "default"
-    ]
+      "default",
+      "main.css"
+    ],
+    "globalMetadata": {
+      "_appTitle": ".NET Gaia Client",
+      "_appFooter": "Copyright © 2019 JOT Automation Ltd.",
+      "_appFaviconPath": "jot_favicon.ico",
+      "_disableBreadcrumb": true,
+      "_disableAffix": true,
+      "_disableContribution": true
+    }
   }
 }

@@ -62,8 +62,6 @@
   <ItemGroup>
     <None Include="api\index.md" />
     <None Include="App.config" />
-    <None Include="articles\intro.md" />
-    <None Include="articles\toc.md" />
     <None Include="docfx.json" />
     <None Include="index.md" />
     <None Include="JOTGaiaClient.nuspec" />
