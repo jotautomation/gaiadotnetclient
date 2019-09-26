@@ -15,7 +15,7 @@ namespace JOT.GaiaClient
     /// </summary>
     public class Application
     {        
-        internal Application(string name, Dictionary<string, ActionDelegate> actions, string href)
+        public Application(string name, Dictionary<string, ActionDelegate> actions, string href)
         {
             Name = name;
             Actions = actions;

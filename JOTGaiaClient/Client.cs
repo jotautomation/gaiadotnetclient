@@ -125,20 +125,34 @@ namespace JOT.GaiaClient
         /// Client implementation for JOT Automation gaia platform machines
         /// </summary>
         /// <param name="baseUrl">URL for the controlled machine</param>
-        public JOTGaiaClient(string baseUrl)
+        public JOTGaiaClient(string baseUrl, string user = "", string password = "")
         {
-            myRestClient = new RestClient(baseUrl);
-            // Fetch applications from the test box
-            Populate();
+            connect(new Uri(baseUrl), user, password);
         }
 
         /// <summary>
         /// Client implementation for JOT Automation gaia platform machines
         /// </summary>
         /// <param name="baseUrl">URL for the controlled machin</param>
-        public JOTGaiaClient(Uri baseUrl)
+        public JOTGaiaClient(Uri baseUrl, string user = "", string password = "")
         {
-            myRestClient = new RestClient(baseUrl);
+            connect(baseUrl, user, password);
+        }
+
+        private void connect(Uri url, string user, string password)
+        {
+            myRestClient = new RestClient(url);
+            myRestClient.CookieContainer = new CookieContainer();
+
+            if (!string.IsNullOrWhiteSpace(user))
+            {
+                // Login to server
+                var request = new RestRequest("login", Method.POST);
+                request.RequestFormat = DataFormat.Json;
+                request.AddJsonBody(new { user = user, password = password });
+                IRestResponse response = myRestClient.Execute(request);
+                Console.WriteLine(response.Content);
+            }
             // Fetch applications from the test box
             Populate();
         }
@@ -184,14 +198,11 @@ namespace JOT.GaiaClient
             Applications = new Dictionary<string, Application>();
             foreach (var entity in response.Data.entities)
             {
-
-                var client = new RestClient(new Uri(entity.href));
-                var entity_request = new RestRequest("", Method.GET);
-
+                var entity_request = new RestRequest(new Uri(entity.href).AbsolutePath, Method.GET);
                 entity_request.AddHeader("Accept", "application/vnd.siren+json");
 
                 //TODO: Validate response
-                var content = (RestResponse<Siren>)client.Execute<Siren>(entity_request);
+                var content = (RestResponse<Siren>)myRestClient.Execute<Siren>(entity_request);
                 var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data), entity.href);
                 Applications[entity.properties["name"]] = app;
             }
