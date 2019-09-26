@@ -14,20 +14,19 @@ namespace JOT.GaiaClient
 {
     public static class Extensions
     {
-        public static Dictionary<string, ActionDelegate> GetActionsFromEntity(this Entity value)
+        public static Dictionary<string, ActionDelegate> GetActionsFromEntity(this Entity value, RestClient client)
         {
-            var client = new RestClient(new Uri(value.href));
-            var request = new RestRequest("", Method.GET);
+            var request = new RestRequest(new Uri(value.href).AbsolutePath, Method.GET);
 
             request.AddHeader("Accept", "application/vnd.siren+json");
 
             //TODO: Validate response
             var content = (RestResponse<Siren>)client.Execute<Siren>(request);
-            var actionDictionary = GetActions(content.Data);
+            var actionDictionary = GetActions(content.Data, client);
             return actionDictionary;
         }
 
-        private static Dictionary<string, ActionDelegate> GetActions(Siren content)
+        private static Dictionary<string, ActionDelegate> GetActions(Siren content, RestClient client)
         {
             //Include blocked actions to actions. TODO: add way to check on runtime if action is blocked or not
             var actions = content.actions;
@@ -45,8 +44,7 @@ namespace JOT.GaiaClient
                 actionDictionary.Add(action.name,
                     (Dictionary<string, object> UserDefinedFields, string plainText) =>
                     {
-                        var actionClient = new RestClient(new Uri(action.href));
-                        var actionRequest = new RestRequest("", action.method.ToRestSharpMethod());
+                        var actionRequest = new RestRequest(new Uri(action.href).AbsolutePath, action.method.ToRestSharpMethod());
                         IRestResponse<object> resp;
 
                         if (action.type == "text/plain")
@@ -78,7 +76,7 @@ namespace JOT.GaiaClient
                             }
 
                         }
-                        resp = actionClient.Execute<object>(actionRequest);
+                        resp = client.Execute<object>(actionRequest);
                         JOTGaiaClient.HandleResponse(resp);
 
                         if (resp.ContentType.Contains("json"))

@@ -203,7 +203,7 @@ namespace JOT.GaiaClient
 
                 //TODO: Validate response
                 var content = (RestResponse<Siren>)myRestClient.Execute<Siren>(entity_request);
-                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data), entity.href);
+                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href);
                 Applications[entity.properties["name"]] = app;
             }
 
@@ -213,10 +213,10 @@ namespace JOT.GaiaClient
             request.AddHeader("Accept", "application/vnd.siren+json");
 
             response = (RestResponse<Siren>)myRestClient.Execute<Siren>(request);
-            StateTriggers = GetActions(response.Data);
+            StateTriggers = GetActions(response.Data, myRestClient);
         }
 
-        private static Dictionary<string, ActionDelegate> GetActions(Siren content)
+        private static Dictionary<string, ActionDelegate> GetActions(Siren content, RestClient client)
         {
             //Include blocked actions to actions. TODO: add way to check on runtime if action is blocked or not
             var actions = content.actions;
@@ -234,8 +234,7 @@ namespace JOT.GaiaClient
                 actionDictionary.Add(action.name,
                     (Dictionary<string, object> UserDefinedFields, string plainText) =>
                     {
-                        var actionClient = new RestClient(new Uri(action.href));
-                        var actionRequest = new RestRequest("", action.method.ToRestSharpMethod());
+                        var actionRequest = new RestRequest(new Uri(action.href).AbsolutePath, action.method.ToRestSharpMethod());
                         IRestResponse<object> resp;
 
                         if (action.type == "text/plain")
@@ -284,7 +283,7 @@ namespace JOT.GaiaClient
                             }
 
                         }
-                        resp = actionClient.Execute<object>(actionRequest);
+                        resp = client.Execute<object>(actionRequest);
                         HandleResponse(resp);
 
                         if (resp.ContentType.Contains("json"))
