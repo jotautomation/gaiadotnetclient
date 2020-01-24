@@ -150,7 +150,8 @@ namespace JOT.GaiaClient
                 var request = new RestRequest("login", Method.POST);
                 request.RequestFormat = DataFormat.Json;
                 request.AddJsonBody(new { user = user, password = password });
-                IRestResponse response = myRestClient.Execute(request);
+                IRestResponse<object> response = myRestClient.Execute<object>(request);
+                HandleResponse(response);
                 Console.WriteLine(response.Content);
             }
             // Fetch applications from the test box
