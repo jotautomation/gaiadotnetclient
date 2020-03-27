@@ -106,13 +106,13 @@
   <h3 id="constructors">Constructors
   </h3>
   <a id="JOT_GaiaClient_JOTGaiaClient__ctor_" data-uid="JOT.GaiaClient.JOTGaiaClient.#ctor*"></a>
-  <h4 id="JOT_GaiaClient_JOTGaiaClient__ctor_System_String_" data-uid="JOT.GaiaClient.JOTGaiaClient.#ctor(System.String)">JOTGaiaClient(String)</h4>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient__ctor_System_String_System_String_System_String_" data-uid="JOT.GaiaClient.JOTGaiaClient.#ctor(System.String,System.String,System.String)">JOTGaiaClient(String, String, String)</h4>
   <div class="markdown level1 summary"><p>Client implementation for JOT Automation gaia platform machines</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JOTGaiaClient(string baseUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">public JOTGaiaClient(string baseUrl, string user = &quot;&quot;, string password = &quot;&quot;)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -130,16 +130,26 @@
         <td><p>URL for the controlled machine</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">user</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">password</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <a id="JOT_GaiaClient_JOTGaiaClient__ctor_" data-uid="JOT.GaiaClient.JOTGaiaClient.#ctor*"></a>
-  <h4 id="JOT_GaiaClient_JOTGaiaClient__ctor_Uri_" data-uid="JOT.GaiaClient.JOTGaiaClient.#ctor(Uri)">JOTGaiaClient(Uri)</h4>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient__ctor_Uri_System_String_System_String_" data-uid="JOT.GaiaClient.JOTGaiaClient.#ctor(Uri,System.String,System.String)">JOTGaiaClient(Uri, String, String)</h4>
   <div class="markdown level1 summary"><p>Client implementation for JOT Automation gaia platform machines</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JOTGaiaClient(Uri baseUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">public JOTGaiaClient(Uri baseUrl, string user = &quot;&quot;, string password = &quot;&quot;)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -156,6 +166,16 @@
         <td><span class="parametername">baseUrl</span></td>
         <td><p>URL for the controlled machin</p>
 </td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">user</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">password</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

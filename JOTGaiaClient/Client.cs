@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
+using WebSocket4Net;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
@@ -24,6 +25,9 @@ namespace JOT.GaiaClient
     /// </summary>
     public class JOTGaiaClient
     {
+
+        internal WebSocket app_state_websocket { get; private set; }
+
         /// <summary>
         /// List of applications on the machine. List wil be populated when
         /// client connects to the machine.
@@ -139,8 +143,19 @@ namespace JOT.GaiaClient
             connect(baseUrl, user, password);
         }
 
+
+
         private void connect(Uri url, string user, string password)
         {
+            var ws_uri_app = new UriBuilder(url)
+            {
+                Scheme = "ws",
+                 Path = "/websocket/applications"
+            };
+
+            app_state_websocket = new WebSocket(ws_uri_app.ToString());
+            app_state_websocket.Open();
+
             myRestClient = new RestClient(url);
             myRestClient.CookieContainer = new CookieContainer();
 
@@ -204,7 +219,7 @@ namespace JOT.GaiaClient
 
                 //TODO: Validate response
                 var content = (RestResponse<Siren>)myRestClient.Execute<Siren>(entity_request);
-                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href);
+                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href, this);
                 Applications[entity.properties["name"]] = app;
             }
 
