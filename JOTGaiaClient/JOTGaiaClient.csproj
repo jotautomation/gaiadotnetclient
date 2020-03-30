@@ -91,6 +91,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Siren.cs" />
+    <Compile Include="Waitable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="api\index.md" />

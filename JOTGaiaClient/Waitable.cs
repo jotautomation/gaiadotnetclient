@@ -13,13 +13,19 @@ namespace JOT.GaiaClient
     {
         internal static readonly Object waitlock = new Object();
         protected StateWaitStruct StateWait = null;
-
+        
         public abstract string State { get; }
-        public abstract string Name { get; }
+        private string Name; 
+        protected abstract WebSocket stateWS { get; }
 
-        public Waitable(WebSocket ws)
+        public Waitable(string name)
         {
-            ws.MessageReceived += App_state_websocket_MessageReceived;
+            Name = name;
+        }
+
+        protected void StartListen()
+        {
+            stateWS.MessageReceived += App_state_websocket_MessageReceived;
         }
 
         private void App_state_websocket_MessageReceived(object sender, WebSocket4Net.MessageReceivedEventArgs e)

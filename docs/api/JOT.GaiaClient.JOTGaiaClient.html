@@ -73,35 +73,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">JOTGaiaClient</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="JOT.GaiaClient.html">JOT.GaiaClient</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
   <h5 id="JOT_GaiaClient_JOTGaiaClient_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class JOTGaiaClient</code></pre>
+    <pre><code class="lang-csharp hljs">public class JOTGaiaClient : Waitable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -265,7 +241,7 @@ See explanation at <a href="https://github.com/jotautomation/gaiadotnetclient#g5
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string State { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public override string State { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -307,6 +283,29 @@ is ready etc.</p>
       </tr>
     </tbody>
   </table>
+  <a id="JOT_GaiaClient_JOTGaiaClient_stateWS_" data-uid="JOT.GaiaClient.JOTGaiaClient.stateWS*"></a>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient_stateWS" data-uid="JOT.GaiaClient.JOTGaiaClient.stateWS">stateWS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override WebSocket stateWS { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WebSocket</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="JOT_GaiaClient_JOTGaiaClient_TestBoxClosing_" data-uid="JOT.GaiaClient.JOTGaiaClient.TestBoxClosing*"></a>
   <h4 id="JOT_GaiaClient_JOTGaiaClient_TestBoxClosing" data-uid="JOT.GaiaClient.JOTGaiaClient.TestBoxClosing">TestBoxClosing</h4>
   <div class="markdown level1 summary"><p>Returns true if test box is closing. Some application actions
@@ -335,6 +334,31 @@ RF or Audio shielded.</p>
   </table>
   <h3 id="methods">Methods
   </h3>
+  <a id="JOT_GaiaClient_JOTGaiaClient_CheckWaitStatus_" data-uid="JOT.GaiaClient.JOTGaiaClient.CheckWaitStatus*"></a>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient_CheckWaitStatus_JObject_" data-uid="JOT.GaiaClient.JOTGaiaClient.CheckWaitStatus(JObject)">CheckWaitStatus(JObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void CheckWaitStatus(JObject status)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">status</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="JOT_GaiaClient_JOTGaiaClient_DownloadWave_" data-uid="JOT.GaiaClient.JOTGaiaClient.DownloadWave*"></a>
   <h4 id="JOT_GaiaClient_JOTGaiaClient_DownloadWave_System_String_" data-uid="JOT.GaiaClient.JOTGaiaClient.DownloadWave(System.String)">DownloadWave(String)</h4>
   <div class="markdown level1 summary"><p>Download wave file (.wav) from G5</p>
@@ -403,6 +427,56 @@ are turned off</p>
       </tr>
     </tbody>
   </table>
+  <a id="JOT_GaiaClient_JOTGaiaClient_TryWaitState_" data-uid="JOT.GaiaClient.JOTGaiaClient.TryWaitState*"></a>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient_TryWaitState_JOT_GaiaClient_JOTGaiaClient_States_System_Int32_" data-uid="JOT.GaiaClient.JOTGaiaClient.TryWaitState(JOT.GaiaClient.JOTGaiaClient.States,System.Int32)">TryWaitState(JOTGaiaClient.States, Int32)</h4>
+  <div class="markdown level1 summary"><p>Wait for state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryWaitState(JOTGaiaClient.States state, int timeOut_ms = -1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="JOT.GaiaClient.JOTGaiaClient.States.html">JOTGaiaClient.States</a></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>State to wait</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">timeOut_ms</span></td>
+        <td><p>The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
+    to wait indefinitely.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns true if state was reached before timeout.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="JOT_GaiaClient_JOTGaiaClient_UploadWave_" data-uid="JOT.GaiaClient.JOTGaiaClient.UploadWave*"></a>
   <h4 id="JOT_GaiaClient_JOTGaiaClient_UploadWave_System_String_" data-uid="JOT.GaiaClient.JOTGaiaClient.UploadWave(System.String)">UploadWave(String)</h4>
   <div class="markdown level1 summary"><p>Upload wave file (.wav) to G5</p>
@@ -426,6 +500,40 @@ are turned off</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">filePath</span></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="JOT_GaiaClient_JOTGaiaClient_WaitState_" data-uid="JOT.GaiaClient.JOTGaiaClient.WaitState*"></a>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient_WaitState_JOT_GaiaClient_JOTGaiaClient_States_System_Int32_" data-uid="JOT.GaiaClient.JOTGaiaClient.WaitState(JOT.GaiaClient.JOTGaiaClient.States,System.Int32)">WaitState(JOTGaiaClient.States, Int32)</h4>
+  <div class="markdown level1 summary"><p>Wait for state. Throws exception if timeout occurs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WaitState(JOTGaiaClient.States state, int timeOut_ms = -1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="JOT.GaiaClient.JOTGaiaClient.States.html">JOTGaiaClient.States</a></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>State to wait</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">timeOut_ms</span></td>
+        <td><p>The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
+    to wait indefinitely.</p>
+</td>
       </tr>
     </tbody>
   </table>

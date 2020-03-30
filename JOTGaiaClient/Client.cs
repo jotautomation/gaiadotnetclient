@@ -9,6 +9,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace JOT.GaiaClient
 {
@@ -23,10 +24,12 @@ namespace JOT.GaiaClient
     /// <summary>
     /// Client implementation for JOT Automation gaia platform machines
     /// </summary>
-    public class JOTGaiaClient
+    public class JOTGaiaClient : Waitable
     {
 
-        internal WebSocket app_state_websocket { get; private set; }
+        internal WebSocket AppStateWebsocket { get; private set; }
+        internal WebSocket MachineStateWebsocket { get; private set; }
+
 
         /// <summary>
         /// List of applications on the machine. List wil be populated when
@@ -111,7 +114,7 @@ namespace JOT.GaiaClient
         /// Returns main state of the machine.
         /// See explanation at https://github.com/jotautomation/gaiadotnetclient#g5-states
         /// </summary>
-        public string State
+        public override string State
         {
             get
             {
@@ -123,6 +126,9 @@ namespace JOT.GaiaClient
                 return response.Data.properties["state"];
             }
         }
+
+        protected override WebSocket stateWS => MachineStateWebsocket;
+
         RestClient myRestClient;
 
         /// <summary>
@@ -130,6 +136,7 @@ namespace JOT.GaiaClient
         /// </summary>
         /// <param name="baseUrl">URL for the controlled machine</param>
         public JOTGaiaClient(string baseUrl, string user = "", string password = "")
+            : base("Machine State")
         {
             connect(new Uri(baseUrl), user, password);
         }
@@ -139,22 +146,65 @@ namespace JOT.GaiaClient
         /// </summary>
         /// <param name="baseUrl">URL for the controlled machin</param>
         public JOTGaiaClient(Uri baseUrl, string user = "", string password = "")
+             : base("Machine State")
         {
             connect(baseUrl, user, password);
         }
 
+        public enum States
+        {
+            Closing,
+            Ready,
+            ReadyForEngage,
+            NotReady,
+            Error
+        }
 
+        /// <summary>
+        /// Wait for state.
+        /// </summary>
+        /// <param name="state">State to wait</param>
+        /// <param name="timeOut_ms">The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
+        ///     to wait indefinitely.</param>
+        /// <returns>Returns true if state was reached before timeout.</returns>
+        public bool TryWaitState(States state, int timeOut_ms = -1)
+        {
+            return TryWaitState(state.ToString(), timeOut_ms);
+        }
+
+        /// <summary>
+        /// Wait for state. Throws exception if timeout occurs.
+        /// </summary>
+        /// <param name="state">State to wait</param>
+        /// <param name="timeOut_ms">The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
+        ///     to wait indefinitely.</param>
+        public void WaitState(States state, int timeOut_ms = -1)
+        {
+            WaitState(state.ToString(), timeOut_ms);
+        }
 
         private void connect(Uri url, string user, string password)
         {
-            var ws_uri_app = new UriBuilder(url)
+            var WsUriApp = new UriBuilder(url)
             {
                 Scheme = "ws",
-                 Path = "/websocket/applications"
+                Path = "/websocket/applications"
             };
 
-            app_state_websocket = new WebSocket(ws_uri_app.ToString());
-            app_state_websocket.Open();
+            AppStateWebsocket = new WebSocket(WsUriApp.ToString());
+            AppStateWebsocket.Open();
+
+            var WsUriMachineState = new UriBuilder(url)
+            {
+                Scheme = "ws",
+                Path = "/websocket/state"
+            };
+
+            MachineStateWebsocket = new WebSocket(WsUriMachineState.ToString());
+            MachineStateWebsocket.Open();
+
+            // Start listen to state changes
+            StartListen();
 
             myRestClient = new RestClient(url);
             myRestClient.CookieContainer = new CookieContainer();
@@ -219,7 +269,7 @@ namespace JOT.GaiaClient
 
                 //TODO: Validate response
                 var content = (RestResponse<Siren>)myRestClient.Execute<Siren>(entity_request);
-                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href, this.app_state_websocket);
+                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href, this.AppStateWebsocket);
                 Applications[entity.properties["name"]] = app;
             }
 
@@ -328,6 +378,12 @@ namespace JOT.GaiaClient
                 else
                     throw new Exception("Request failed. Status " + resp.StatusCode);
             }
+        }
+
+        protected override void CheckWaitStatus(JObject status)
+        {
+            if (status?["state"].ToString() == this.StateWait?.State)
+                this.StateWait.WaitEvent.Set();
         }
     }
 

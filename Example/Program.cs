@@ -31,26 +31,13 @@ namespace JOT.Client
                 {
                     //From here starts the actual test sequence 
 
-                    // Step 1: We are waiting that the test box gets ready and operator puts DUT(s) in
-
-                    // (Todo: implement waiting witht out polling)
-                    while (!(client.TestBoxClosing || client.ReadyForTesting))
-                    {
-
-                        Thread.Sleep(10);
-                    }
+                    // Step 1: We are waiting that the test box gets ready and operator puts DUT(s) in.
 
                     // Step 2: Operator did put the DUT(s) in. DUT(s) is locked and it is safe to attach battery connector, USB etc.
                     // The test box is still closing so it is not audio or RF shielded and robot actions are not allowed
 
-                    Console.WriteLine("Test box closing!");
-
                     // Wait that the test box is closed and ready for testing
-                    // (Todo: implement waiting witht out polling)
-                    while (!client.ReadyForTesting)
-                    {
-                        Thread.Sleep(10);
-                    }
+                    client.WaitState(JOTGaiaClient.States.Ready); ;
 
                     // Step 3: Test box is fully closed and we are ready for actual testing.
                     Console.WriteLine("Ready for testing!");
@@ -104,6 +91,8 @@ namespace JOT.Client
                     // Here we have two DUTs. Let's set pass result for the DUT on right and fail result for the DUT on left.
                     // DUT is also application. Search type DutApplication from URL/api/applications to get names of DUTs.
                     client.StateTriggers["Release"](new FieldsObj { { "dut_right", "pass" }, { "dut_left", "fail" } });
+
+                    client.WaitState(JOTGaiaClient.States.NotReady);
                     #endregion
                 }
                 #endregion

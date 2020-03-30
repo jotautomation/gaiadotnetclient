@@ -74,45 +74,21 @@ Moving parts on mechanics, robots, electronics...</p>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Application</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="JOT.GaiaClient.html">JOT.GaiaClient</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
   <h5 id="JOT_GaiaClient_Application_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Application</code></pre>
+    <pre><code class="lang-csharp hljs">public class Application : Waitable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <a id="JOT_GaiaClient_Application__ctor_" data-uid="JOT.GaiaClient.Application.#ctor*"></a>
-  <h4 id="JOT_GaiaClient_Application__ctor_System_String_System_Collections_Generic_Dictionary_System_String_JOT_GaiaClient_ActionDelegate__System_String_JOT_GaiaClient_JOTGaiaClient_" data-uid="JOT.GaiaClient.Application.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,JOT.GaiaClient.ActionDelegate},System.String,JOT.GaiaClient.JOTGaiaClient)">Application(String, Dictionary&lt;String, ActionDelegate&gt;, String, JOTGaiaClient)</h4>
+  <h4 id="JOT_GaiaClient_Application__ctor_System_String_System_Collections_Generic_Dictionary_System_String_JOT_GaiaClient_ActionDelegate__System_String_WebSocket_" data-uid="JOT.GaiaClient.Application.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,JOT.GaiaClient.ActionDelegate},System.String,WebSocket)">Application(String, Dictionary&lt;String, ActionDelegate&gt;, String, WebSocket)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Application(string name, Dictionary&lt;string, ActionDelegate&gt; actions, string href, JOTGaiaClient gaiaClient)</code></pre>
+    <pre><code class="lang-csharp hljs">public Application(string name, Dictionary&lt;string, ActionDelegate&gt; actions, string href, WebSocket ws)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -140,8 +116,8 @@ Moving parts on mechanics, robots, electronics...</p>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="JOT.GaiaClient.JOTGaiaClient.html">JOTGaiaClient</a></td>
-        <td><span class="parametername">gaiaClient</span></td>
+        <td><span class="xref">WebSocket</span></td>
+        <td><span class="parametername">ws</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -251,7 +227,7 @@ Moving parts on mechanics, robots, electronics...</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string State { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public override string State { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -268,16 +244,38 @@ Moving parts on mechanics, robots, electronics...</p>
       </tr>
     </tbody>
   </table>
+  <a id="JOT_GaiaClient_Application_stateWS_" data-uid="JOT.GaiaClient.Application.stateWS*"></a>
+  <h4 id="JOT_GaiaClient_Application_stateWS" data-uid="JOT.GaiaClient.Application.stateWS">stateWS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override WebSocket stateWS { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WebSocket</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
-  <a id="JOT_GaiaClient_Application_TryWaitState_" data-uid="JOT.GaiaClient.Application.TryWaitState*"></a>
-  <h4 id="JOT_GaiaClient_Application_TryWaitState_System_String_System_Int32_" data-uid="JOT.GaiaClient.Application.TryWaitState(System.String,System.Int32)">TryWaitState(String, Int32)</h4>
-  <div class="markdown level1 summary"><p>Wait for state.</p>
-</div>
+  <a id="JOT_GaiaClient_Application_CheckWaitStatus_" data-uid="JOT.GaiaClient.Application.CheckWaitStatus*"></a>
+  <h4 id="JOT_GaiaClient_Application_CheckWaitStatus_JObject_" data-uid="JOT.GaiaClient.Application.CheckWaitStatus(JObject)">CheckWaitStatus(JObject)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryWaitState(string state, int timeOut_ms = -1)</code></pre>
+    <pre><code class="lang-csharp hljs">protected override void CheckWaitStatus(JObject status)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -290,67 +288,9 @@ Moving parts on mechanics, robots, electronics...</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">state</span></td>
-        <td><p>State to wait</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">timeOut_ms</span></td>
-        <td><p>The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
-    to wait indefinitely.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>Returns true if state was reached before timeout.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="JOT_GaiaClient_Application_WaitState_" data-uid="JOT.GaiaClient.Application.WaitState*"></a>
-  <h4 id="JOT_GaiaClient_Application_WaitState_System_String_System_Int32_" data-uid="JOT.GaiaClient.Application.WaitState(System.String,System.Int32)">WaitState(String, Int32)</h4>
-  <div class="markdown level1 summary"><p>Wait for state. Throws exception if timeout occurs.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void WaitState(string state, int timeOut_ms = -1)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">state</span></td>
-        <td><p>State to wait</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">timeOut_ms</span></td>
-        <td><p>The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
-    to wait indefinitely.</p>
-</td>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">status</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

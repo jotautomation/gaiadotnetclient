@@ -15,17 +15,18 @@ namespace JOT.GaiaClient
     /// Everything you can control on the machine is application. 
     /// Moving parts on mechanics, robots, electronics...
     /// </summary>
-    public class Application:Waitable
+    public class Application : Waitable
     {
-        private string myName;
+        private WebSocket myStateWs;
 
-        public Application(string name, Dictionary<string, ActionDelegate> actions, string href, WebSocket ws)
-            :base(ws)
+        public Application(string name, Dictionary<string, ActionDelegate> actions, string href, WebSocket ws):base(name)
 
         {
-            myName = name;
+            Name = name;
             Actions = actions;
             Href = href;
+            myStateWs = ws;
+            StartListen();
         }
 
         /// <summary>
@@ -67,12 +68,14 @@ namespace JOT.GaiaClient
         /// <summary>
         /// Name of the application
         /// </summary>
-        public override string Name { get => myName; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Link to the application
         /// </summary>
         public string Href { get; private set; }
+
+        protected override WebSocket stateWS => myStateWs;
 
         protected override void CheckWaitStatus(JObject status)
         {
