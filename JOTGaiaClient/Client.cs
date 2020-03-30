@@ -219,7 +219,7 @@ namespace JOT.GaiaClient
 
                 //TODO: Validate response
                 var content = (RestResponse<Siren>)myRestClient.Execute<Siren>(entity_request);
-                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href, this);
+                var app = (Application)Activator.CreateInstance(typeof(Application), (string)entity.properties["name"], GetActions(content.Data, myRestClient), entity.href, this.app_state_websocket);
                 Applications[entity.properties["name"]] = app;
             }
 
