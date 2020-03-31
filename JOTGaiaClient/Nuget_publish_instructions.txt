@@ -1,0 +1,3 @@
+- Set version number according to semver.org using tree left most digits on JotGaiaClient -> properties -> Assembly information
+- 'nuget pack'
+- nuget push JOT.GaiaClient.1.0.1.nupkg [API_KEY (from https://www.nuget.org/)] -Source https://api.nuget.org/v3/index.json
