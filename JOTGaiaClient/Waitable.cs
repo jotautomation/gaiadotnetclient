@@ -13,9 +13,9 @@ namespace JOT.GaiaClient
     {
         internal static readonly Object waitlock = new Object();
         protected StateWaitStruct StateWait = null;
-        
+
         public abstract string State { get; }
-        private string Name; 
+        private string Name;
         protected abstract WebSocket stateWS { get; }
 
         public Waitable(string name)
@@ -44,16 +44,23 @@ namespace JOT.GaiaClient
         /// <param name="timeOut_ms">The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
         ///     to wait indefinitely.</param>
         /// <returns>Returns true if state was reached before timeout.</returns>
-        public bool TryWaitState(string state, int timeOut_ms = -1)
+        public bool TryWaitState(string state, int timeOut_ms = -1, bool stopWaitOnError = true)
         {
             var waitEvent = new ManualResetEvent(false);
 
+            var states = new string[] { state };
+
+            if (stopWaitOnError)
+            {
+                states = new string[] { state, "error", "Error" };
+            }
+
             lock (waitlock)
             {
-                this.StateWait = new StateWaitStruct() { State = state, WaitEvent = waitEvent };
+                this.StateWait = new StateWaitStruct() { States = states, WaitEvent = waitEvent };
 
                 // Check initial state
-                if (this.State == state)
+                if(states.Any(st => st == this.State))
                     waitEvent.Set();
             }
 
@@ -65,18 +72,22 @@ namespace JOT.GaiaClient
         /// </summary>
         /// <param name="state">State to wait</param>
         /// <param name="timeOut_ms">The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
+        /// <paramref name="raiseOnError"/>Raise GaiaClientException if the thing that is waited goes to error state
         ///     to wait indefinitely.</param>
-        public void WaitState(string state, int timeOut_ms = -1)
+        public void WaitState(string state, int timeOut_ms = -1, bool raiseOnError = true)
         {
             if (!TryWaitState(state, timeOut_ms))
                 throw new TimeoutException("Timeout while waiting " + state + " for " + this.Name + ". Current state: " + this.State);
+
+            if (raiseOnError && this.State != state)
+                throw new GaiaErrorStateException($"Waiting state '{state}' for '{Name}', but state is '{State}'");
         }
 
         protected abstract void CheckWaitStatus(JObject status);
 
         protected class StateWaitStruct
         {
-            internal string State { get; set; }
+            internal string[] States { get; set; }
             internal ManualResetEvent WaitEvent { get; set; }
         }
     }

@@ -19,7 +19,7 @@ namespace JOT.GaiaClient
     {
         private WebSocket myStateWs;
 
-        public Application(string name, Dictionary<string, ActionDelegate> actions, string href, WebSocket ws):base(name)
+        public Application(string name, Dictionary<string, ActionDelegate> actions, string href, WebSocket ws) : base(name)
 
         {
             Name = name;
@@ -79,7 +79,8 @@ namespace JOT.GaiaClient
 
         protected override void CheckWaitStatus(JObject status)
         {
-            if (status?["name"].ToString() == this.Name && status?["value"].ToString() == this.StateWait?.State)
+            if (StateWait != null &&
+                status?["name"].ToString() == this.Name && this.StateWait.States.Any(st => st == status?["value"].ToString()))
                 this.StateWait.WaitEvent.Set();
         }
     }

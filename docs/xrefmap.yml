@@ -144,18 +144,6 @@ references:
   commentId: M:JOT.GaiaClient.GaiaClientException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
   fullName: JOT.GaiaClient.GaiaClientException.GaiaClientException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
   nameWithType: GaiaClientException.GaiaClientException(SerializationInfo, StreamingContext)
-- uid: JOT.GaiaClient.GaiaClientException.#ctor(System.String)
-  name: GaiaClientException(String)
-  href: api/JOT.GaiaClient.GaiaClientException.html#JOT_GaiaClient_GaiaClientException__ctor_System_String_
-  commentId: M:JOT.GaiaClient.GaiaClientException.#ctor(System.String)
-  fullName: JOT.GaiaClient.GaiaClientException.GaiaClientException(System.String)
-  nameWithType: GaiaClientException.GaiaClientException(String)
-- uid: JOT.GaiaClient.GaiaClientException.#ctor(System.String,System.Exception)
-  name: GaiaClientException(String, Exception)
-  href: api/JOT.GaiaClient.GaiaClientException.html#JOT_GaiaClient_GaiaClientException__ctor_System_String_System_Exception_
-  commentId: M:JOT.GaiaClient.GaiaClientException.#ctor(System.String,System.Exception)
-  fullName: JOT.GaiaClient.GaiaClientException.GaiaClientException(System.String, System.Exception)
-  nameWithType: GaiaClientException.GaiaClientException(String, Exception)
 - uid: JOT.GaiaClient.GaiaClientException.#ctor*
   name: GaiaClientException
   href: api/JOT.GaiaClient.GaiaClientException.html#JOT_GaiaClient_GaiaClientException__ctor_
@@ -256,6 +244,80 @@ references:
   isSpec: "True"
   fullName: JOT.GaiaClient.GaiaError.time
   nameWithType: GaiaError.time
+- uid: JOT.GaiaClient.GaiaErrorStateException
+  name: GaiaErrorStateException
+  href: api/JOT.GaiaClient.GaiaErrorStateException.html
+  commentId: T:JOT.GaiaClient.GaiaErrorStateException
+  fullName: JOT.GaiaClient.GaiaErrorStateException
+  nameWithType: GaiaErrorStateException
+- uid: JOT.GaiaClient.GaiaErrorStateException.#ctor
+  name: GaiaErrorStateException()
+  href: api/JOT.GaiaClient.GaiaErrorStateException.html#JOT_GaiaClient_GaiaErrorStateException__ctor
+  commentId: M:JOT.GaiaClient.GaiaErrorStateException.#ctor
+  fullName: JOT.GaiaClient.GaiaErrorStateException.GaiaErrorStateException()
+  nameWithType: GaiaErrorStateException.GaiaErrorStateException()
+- uid: JOT.GaiaClient.GaiaErrorStateException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: GaiaErrorStateException(SerializationInfo, StreamingContext)
+  href: api/JOT.GaiaClient.GaiaErrorStateException.html#JOT_GaiaClient_GaiaErrorStateException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:JOT.GaiaClient.GaiaErrorStateException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: JOT.GaiaClient.GaiaErrorStateException.GaiaErrorStateException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: GaiaErrorStateException.GaiaErrorStateException(SerializationInfo, StreamingContext)
+- uid: JOT.GaiaClient.GaiaErrorStateException.#ctor(System.String)
+  name: GaiaErrorStateException(String)
+  href: api/JOT.GaiaClient.GaiaErrorStateException.html#JOT_GaiaClient_GaiaErrorStateException__ctor_System_String_
+  commentId: M:JOT.GaiaClient.GaiaErrorStateException.#ctor(System.String)
+  fullName: JOT.GaiaClient.GaiaErrorStateException.GaiaErrorStateException(System.String)
+  nameWithType: GaiaErrorStateException.GaiaErrorStateException(String)
+- uid: JOT.GaiaClient.GaiaErrorStateException.#ctor(System.String,System.Exception)
+  name: GaiaErrorStateException(String, Exception)
+  href: api/JOT.GaiaClient.GaiaErrorStateException.html#JOT_GaiaClient_GaiaErrorStateException__ctor_System_String_System_Exception_
+  commentId: M:JOT.GaiaClient.GaiaErrorStateException.#ctor(System.String,System.Exception)
+  fullName: JOT.GaiaClient.GaiaErrorStateException.GaiaErrorStateException(System.String, System.Exception)
+  nameWithType: GaiaErrorStateException.GaiaErrorStateException(String, Exception)
+- uid: JOT.GaiaClient.GaiaErrorStateException.#ctor*
+  name: GaiaErrorStateException
+  href: api/JOT.GaiaClient.GaiaErrorStateException.html#JOT_GaiaClient_GaiaErrorStateException__ctor_
+  commentId: Overload:JOT.GaiaClient.GaiaErrorStateException.#ctor
+  isSpec: "True"
+  fullName: JOT.GaiaClient.GaiaErrorStateException.GaiaErrorStateException
+  nameWithType: GaiaErrorStateException.GaiaErrorStateException
+- uid: JOT.GaiaClient.GaiaException
+  name: GaiaException
+  href: api/JOT.GaiaClient.GaiaException.html
+  commentId: T:JOT.GaiaClient.GaiaException
+  fullName: JOT.GaiaClient.GaiaException
+  nameWithType: GaiaException
+- uid: JOT.GaiaClient.GaiaException.#ctor
+  name: GaiaException()
+  href: api/JOT.GaiaClient.GaiaException.html#JOT_GaiaClient_GaiaException__ctor
+  commentId: M:JOT.GaiaClient.GaiaException.#ctor
+  fullName: JOT.GaiaClient.GaiaException.GaiaException()
+  nameWithType: GaiaException.GaiaException()
+- uid: JOT.GaiaClient.GaiaException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: GaiaException(SerializationInfo, StreamingContext)
+  href: api/JOT.GaiaClient.GaiaException.html#JOT_GaiaClient_GaiaException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:JOT.GaiaClient.GaiaException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: JOT.GaiaClient.GaiaException.GaiaException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: GaiaException.GaiaException(SerializationInfo, StreamingContext)
+- uid: JOT.GaiaClient.GaiaException.#ctor(System.String)
+  name: GaiaException(String)
+  href: api/JOT.GaiaClient.GaiaException.html#JOT_GaiaClient_GaiaException__ctor_System_String_
+  commentId: M:JOT.GaiaClient.GaiaException.#ctor(System.String)
+  fullName: JOT.GaiaClient.GaiaException.GaiaException(System.String)
+  nameWithType: GaiaException.GaiaException(String)
+- uid: JOT.GaiaClient.GaiaException.#ctor(System.String,System.Exception)
+  name: GaiaException(String, Exception)
+  href: api/JOT.GaiaClient.GaiaException.html#JOT_GaiaClient_GaiaException__ctor_System_String_System_Exception_
+  commentId: M:JOT.GaiaClient.GaiaException.#ctor(System.String,System.Exception)
+  fullName: JOT.GaiaClient.GaiaException.GaiaException(System.String, System.Exception)
+  nameWithType: GaiaException.GaiaException(String, Exception)
+- uid: JOT.GaiaClient.GaiaException.#ctor*
+  name: GaiaException
+  href: api/JOT.GaiaClient.GaiaException.html#JOT_GaiaClient_GaiaException__ctor_
+  commentId: Overload:JOT.GaiaClient.GaiaException.#ctor
+  isSpec: "True"
+  fullName: JOT.GaiaClient.GaiaException.GaiaException
+  nameWithType: GaiaException.GaiaException
 - uid: JOT.GaiaClient.JOTGaiaClient
   name: JOTGaiaClient
   href: api/JOT.GaiaClient.JOTGaiaClient.html

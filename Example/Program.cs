@@ -97,6 +97,10 @@ namespace JOT.Client
                 }
                 #endregion
             }
+            catch(GaiaErrorStateException ex)
+            {
+                Console.WriteLine("Error state on application or on the tester itself. Error message: " + ex.Message);
+            }
             catch (GaiaClientException ex)
             {
                 Console.WriteLine("G5 reported error");

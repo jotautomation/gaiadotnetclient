@@ -79,10 +79,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JOT.GaiaClient.GaiaClientException.html",
-          "hash": "01OnoN9Ec3qyA81P68wNRA=="
+          "hash": "4ao7XyGVQ/Tv4cY0RUkqAw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -94,7 +94,31 @@
           "hash": "VSkFAEFH1XfkQZf1g9bk1g=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.GaiaErrorStateException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.GaiaErrorStateException.html",
+          "hash": "LVBln/E2s5G46SMVaRSwDA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/JOT.GaiaClient.GaiaException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JOT.GaiaClient.GaiaException.html",
+          "hash": "ooRd3e9ZrV9nENya0+wEpA=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -127,10 +151,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JOT.GaiaClient.html",
-          "hash": "nZj4WZZ6Y3XVTmcqCk2j+g=="
+          "hash": "/EFM4D5+cVRIbOCvDQcZPw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -139,7 +163,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "bZVDCvWJ2ykqE4XEWTYg6Q=="
+          "hash": "3yUww5m5N6SraviDHHGUiA=="
         }
       },
       "is_incremental": false,
@@ -167,16 +191,16 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "ResourceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -190,8 +214,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 7,
-          "skipped_file_count": 5
+          "total_file_count": 9,
+          "skipped_file_count": 9
         }
       }
     },

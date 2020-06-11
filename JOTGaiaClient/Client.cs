@@ -382,21 +382,47 @@ namespace JOT.GaiaClient
 
         protected override void CheckWaitStatus(JObject status)
         {
-            if (status?["state"].ToString() == this.StateWait?.State)
+            if (this.StateWait != null && this.StateWait.States.Any(st => st == status?["state"].ToString()))
                 this.StateWait.WaitEvent.Set();
         }
     }
 
     [Serializable]
-    public class GaiaClientException : Exception
+    public class GaiaException : Exception
+    {
+        public GaiaException() { }
+        public GaiaException(string message) : base(message) { }
+        public GaiaException(string message, Exception inner) : base(message, inner) { }
+        protected GaiaException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
+
+    /// <summary>
+    /// Application or the tester itself in error state
+    /// </summary>
+    [Serializable]
+    public class GaiaErrorStateException : Exception
+    {
+        public GaiaErrorStateException() { }
+        public GaiaErrorStateException(string message) : base(message) { }
+        public GaiaErrorStateException(string message, Exception inner) : base(message, inner) { }
+        protected GaiaErrorStateException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
+
+    /// <summary>
+    /// Generic excpetion that comes from the tester
+    /// </summary>
+    [Serializable]
+    public class GaiaClientException : GaiaException
     {
         public GaiaError GaiaError;
         public GaiaClientException(GaiaError error) : base(error.message)
         {
             this.GaiaError = error;
         }
-        public GaiaClientException(string message) : base(message) { }
-        public GaiaClientException(string message, Exception inner) : base(message, inner) { }
         protected GaiaClientException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
