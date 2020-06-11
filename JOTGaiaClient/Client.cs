@@ -185,6 +185,25 @@ namespace JOT.GaiaClient
 
         private void connect(Uri url, string user, string password)
         {
+            // create client
+            myRestClient = new RestClient(url);
+
+            var version_request = new RestRequest("api", Method.GET);
+
+            version_request.AddHeader("Accept", "application/vnd.siren+json");
+
+            var version_response = (RestResponse<Siren>)myRestClient.Execute<Siren>(version_request);
+
+            if (!version_response.IsSuccessful)
+            {
+                throw version_response.ErrorException ?? new Exception("Unknown error when trying to connect to machine.");
+            }
+
+            var gaia_version = new Version(version_response.Data.properties["sw_version"].Split('-')[0]);
+
+            if (gaia_version.CompareTo(new Version("1.2.1")) < 0)
+                throw new GaiaException($"Incompatible versions. Minimun version of Gaia machine is 1.2.1. Currently {gaia_version}");
+
             var WsUriApp = new UriBuilder(url)
             {
                 Scheme = "ws",
@@ -206,7 +225,6 @@ namespace JOT.GaiaClient
             // Start listen to state changes
             StartListen();
 
-            myRestClient = new RestClient(url);
             myRestClient.CookieContainer = new CookieContainer();
 
             if (!string.IsNullOrWhiteSpace(user))
