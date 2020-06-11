@@ -428,13 +428,13 @@ are turned off</p>
     </tbody>
   </table>
   <a id="JOT_GaiaClient_JOTGaiaClient_TryWaitState_" data-uid="JOT.GaiaClient.JOTGaiaClient.TryWaitState*"></a>
-  <h4 id="JOT_GaiaClient_JOTGaiaClient_TryWaitState_JOT_GaiaClient_JOTGaiaClient_States_System_Int32_" data-uid="JOT.GaiaClient.JOTGaiaClient.TryWaitState(JOT.GaiaClient.JOTGaiaClient.States,System.Int32)">TryWaitState(JOTGaiaClient.States, Int32)</h4>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient_TryWaitState_JOT_GaiaClient_JOTGaiaClient_States_System_Int32_System_Boolean_" data-uid="JOT.GaiaClient.JOTGaiaClient.TryWaitState(JOT.GaiaClient.JOTGaiaClient.States,System.Int32,System.Boolean)">TryWaitState(JOTGaiaClient.States, Int32, Boolean)</h4>
   <div class="markdown level1 summary"><p>Wait for state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryWaitState(JOTGaiaClient.States state, int timeOut_ms = -1)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryWaitState(JOTGaiaClient.States state, int timeOut_ms = -1, bool raiseOnError = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -458,6 +458,11 @@ are turned off</p>
         <td><p>The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
     to wait indefinitely.</p>
 </td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">raiseOnError</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -504,13 +509,13 @@ are turned off</p>
     </tbody>
   </table>
   <a id="JOT_GaiaClient_JOTGaiaClient_WaitState_" data-uid="JOT.GaiaClient.JOTGaiaClient.WaitState*"></a>
-  <h4 id="JOT_GaiaClient_JOTGaiaClient_WaitState_JOT_GaiaClient_JOTGaiaClient_States_System_Int32_" data-uid="JOT.GaiaClient.JOTGaiaClient.WaitState(JOT.GaiaClient.JOTGaiaClient.States,System.Int32)">WaitState(JOTGaiaClient.States, Int32)</h4>
+  <h4 id="JOT_GaiaClient_JOTGaiaClient_WaitState_JOT_GaiaClient_JOTGaiaClient_States_System_Int32_System_Boolean_" data-uid="JOT.GaiaClient.JOTGaiaClient.WaitState(JOT.GaiaClient.JOTGaiaClient.States,System.Int32,System.Boolean)">WaitState(JOTGaiaClient.States, Int32, Boolean)</h4>
   <div class="markdown level1 summary"><p>Wait for state. Throws exception if timeout occurs.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void WaitState(JOTGaiaClient.States state, int timeOut_ms = -1)</code></pre>
+    <pre><code class="lang-csharp hljs">public void WaitState(JOTGaiaClient.States state, int timeOut_ms = -1, bool raiseOnError = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -534,6 +539,11 @@ are turned off</p>
         <td><p>The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
     to wait indefinitely.</p>
 </td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">raiseOnError</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

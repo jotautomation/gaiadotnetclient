@@ -167,9 +167,9 @@ namespace JOT.GaiaClient
         /// <param name="timeOut_ms">The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
         ///     to wait indefinitely.</param>
         /// <returns>Returns true if state was reached before timeout.</returns>
-        public bool TryWaitState(States state, int timeOut_ms = -1)
+        public bool TryWaitState(States state, int timeOut_ms = -1, bool raiseOnError = true)
         {
-            return TryWaitState(state.ToString(), timeOut_ms);
+            return TryWaitState(state.ToString(), timeOut_ms, raiseOnError);
         }
 
         /// <summary>
@@ -178,9 +178,9 @@ namespace JOT.GaiaClient
         /// <param name="state">State to wait</param>
         /// <param name="timeOut_ms">The number of milliseconds to wait, or System.Threading.Timeout.Infinite (-1)
         ///     to wait indefinitely.</param>
-        public void WaitState(States state, int timeOut_ms = -1)
+        public void WaitState(States state, int timeOut_ms = -1, bool raiseOnError = true)
         {
-            WaitState(state.ToString(), timeOut_ms);
+            WaitState(state.ToString(), timeOut_ms, raiseOnError);
         }
 
         private void connect(Uri url, string user, string password)
