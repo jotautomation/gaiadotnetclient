@@ -201,8 +201,8 @@ namespace JOT.GaiaClient
 
             var gaia_version = new Version(version_response.Data.properties["sw_version"].Split('-')[0]);
 
-            if (gaia_version.CompareTo(new Version("1.2.1")) < 0)
-                throw new GaiaException($"Incompatible versions. Minimun version of Gaia machine is 1.2.1. Currently {gaia_version}");
+            if (gaia_version.CompareTo(new Version("1.2.0")) < 0)
+                throw new GaiaException($"Incompatible versions. Minimun version of Gaia machine is 1.2.0. Currently {gaia_version}");
 
             var WsUriApp = new UriBuilder(url)
             {
