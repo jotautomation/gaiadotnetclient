@@ -19,14 +19,40 @@ namespace JOT.GaiaClient
     {
         private WebSocket myStateWs;
 
-        public Application(string name, Dictionary<string, ActionDelegate> actions, string href, WebSocket ws) : base(name)
+        public Application(string name, Dictionary<string, ActionDelegate> actions, List<Action> actionProperties, List<Action> blockedActionProperties, string href, WebSocket ws) : base(name)
 
         {
+            SetActionProperties(actionProperties, blockedActionProperties);
             Name = name;
             Actions = actions;
             Href = href;
             myStateWs = ws;
+            myStateWs.MessageReceived += MyStateWs_MessageReceived;
             StartListen();
+        }
+
+        private void SetActionProperties(List<Action> actionProperties, List<Action> blockedActionProperties)
+        {
+            if (blockedActionProperties != null)
+                actionProperties.AddRange(blockedActionProperties);
+
+            ActionProperties = new Dictionary<string, Action>();
+
+            foreach (var action in actionProperties)
+            {
+                ActionProperties[action.name] = action;
+            }           
+        }
+
+        private void MyStateWs_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            var status = JObject.Parse(e.Message);
+            if(status?["name"].ToString() == this.Name)
+            {
+                SetActionProperties(
+                    status["fullState"]["actions"].ToObject<List<Action>>(),
+                    status["fullState"]["blocked_actions"]?.ToObject<List<Action>>());
+            }
         }
 
         /// <summary>
@@ -64,6 +90,8 @@ namespace JOT.GaiaClient
                 return content.Data.properties;
             }
         }
+
+        public Dictionary<string, Action> ActionProperties { get; private set; }
 
         /// <summary>
         /// Name of the application

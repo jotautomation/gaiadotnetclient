@@ -34,6 +34,7 @@ namespace JOT.GaiaClient
     {
         
         public string name { get; set; }
+        public bool active { get; set; }
         public string title { get; set; }
         public string method { get; set; }
         public string href { get; set; }
