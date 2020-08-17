@@ -18,10 +18,12 @@ namespace JOT.GaiaClient
     public class Application : Waitable
     {
         private WebSocket myStateWs;
+        private readonly object ActionPropertiesLock = new object();
 
         public Application(string name, Dictionary<string, ActionDelegate> actions, List<Action> actionProperties, List<Action> blockedActionProperties, string href, WebSocket ws) : base(name)
 
         {
+            ActionWaitEvents = new Dictionary<object, string>();
             SetActionProperties(actionProperties, blockedActionProperties);
             Name = name;
             Actions = actions;
@@ -33,21 +35,31 @@ namespace JOT.GaiaClient
 
         private void SetActionProperties(List<Action> actionProperties, List<Action> blockedActionProperties)
         {
-            if (blockedActionProperties != null)
-                actionProperties.AddRange(blockedActionProperties);
-
-            ActionProperties = new Dictionary<string, Action>();
-
-            foreach (var action in actionProperties)
+            lock (ActionPropertiesLock)
             {
-                ActionProperties[action.name] = action;
-            }           
+                if (blockedActionProperties != null)
+                    actionProperties.AddRange(blockedActionProperties);
+
+                ActionProperties = new Dictionary<string, Action>();
+
+                foreach (var action in actionProperties)
+                {
+                    ActionProperties[action.name] = action;
+                    foreach (var wait in ActionWaitEvents)
+                    {
+                        if (wait.Value == action.name && action.active)
+                        {
+                            ((ManualResetEvent)wait.Key).Set();
+                        }
+                    }
+                }
+            }
         }
 
         private void MyStateWs_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
             var status = JObject.Parse(e.Message);
-            if(status?["name"].ToString() == this.Name)
+            if (status?["name"].ToString() == this.Name)
             {
                 SetActionProperties(
                     status["fullState"]["actions"].ToObject<List<Action>>(),
@@ -56,7 +68,40 @@ namespace JOT.GaiaClient
         }
 
         /// <summary>
-        /// Returns state if the application. For stateful application state, for IO value of the IO and so on...
+        /// Executes action on application. By default waits that action is available/not blocked before executing.
+        /// </summary>
+        /// <param name="actionName">Name of the action to perform</param>
+        /// <param name="fields">Named fields that will be converted to JSON fields</param>
+        /// <param name="plainText">Plain text body of the HTTP request</param>
+        /// <param name="waitActive">If true, waits that the action becomes active i.e. is not blocked. 
+        /// Action can be blocked (not active) when it is not safe to execute the action or the previous action is still ongoing.</param>
+        /// <param name="waitActiveTimeout"></param>
+        /// <exception cref="WaitTimeoutException">Throws WaitTimeutException, if waitActiveTimeout was defined and action did not come available during that time.</exception>
+        public void ExecuteAction(string actionName, Dictionary<string, object> fields = null, string plainText = null, bool waitActive = true, int waitActiveTimeout = 0)
+        {
+
+            ManualResetEvent manualResetEvent = new ManualResetEvent(false);
+
+            lock (ActionPropertiesLock)
+            {
+
+                if (!this.ActionProperties[actionName].active && waitActive)
+                    ActionWaitEvents[manualResetEvent] = actionName;
+            }
+ 
+            if (waitActive)
+            {
+                var WaitResult = manualResetEvent.WaitOne(waitActiveTimeout);
+                ActionWaitEvents.Remove(manualResetEvent);
+                if (!WaitResult)
+                    throw new WaitTimeoutException();
+            }
+
+            this.Actions[actionName](fields, plainText);
+        }
+
+        /// <summary>
+        /// Returns state of the application. For stateful application state, for IO value of the IO and so on...
         /// </summary>
         public override string State
         {
@@ -68,7 +113,7 @@ namespace JOT.GaiaClient
         }
 
         /// <summary>
-        /// All actions that application can perform
+        /// All actions the application can perform
         /// </summary>
         public Dictionary<string, ActionDelegate> Actions { get; private set; }
 
@@ -104,6 +149,8 @@ namespace JOT.GaiaClient
         public string Href { get; private set; }
 
         protected override WebSocket stateWS => myStateWs;
+
+        public Dictionary<object, string> ActionWaitEvents { get; private set; }
 
         protected override void CheckWaitStatus(JObject status)
         {

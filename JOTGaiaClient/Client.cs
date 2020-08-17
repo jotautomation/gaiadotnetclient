@@ -421,6 +421,21 @@ namespace JOT.GaiaClient
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 
+
+    /// <summary>
+    /// Timeout while waiting
+    /// </summary>
+    [Serializable]
+    public class WaitTimeoutException : GaiaException
+    {
+        public WaitTimeoutException() { }
+        public WaitTimeoutException(string message) : base(message) { }
+        public WaitTimeoutException(string message, Exception inner) : base(message, inner) { }
+        protected WaitTimeoutException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
+
     /// <summary>
     /// Application or the tester itself in error state
     /// </summary>
