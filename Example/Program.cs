@@ -44,6 +44,16 @@ namespace JOT.Client
                     #region Control commands examples 
                     // Execute the tests. Here's some examples.
 
+                    //There is two ways to execute actions with the applications
+                    // 1. Call action methods stored on dictionary in application object. Like this:
+                    client.Applications["MainRobot"].Actions["changeTo-AudioTool"]();
+
+                    // 2. Use ExecuteAction method on application object. Difference between these two is that
+                    // later will check if action is available and wait it to be available. Some actions may be blocked
+                    // because G5 is not on correct state or for some other safety related reason.
+                    client.Applications["MainRobot"].ExecuteAction("changeTo-AudioTool");
+
+
                     // Change robot tool. Note! Tool change can be defined also in G-code but some time you can save time by changing the tool
                     // while doing something else.
                     client.Applications["MainRobot"].Actions["changeTo-AudioTool"]();
