@@ -135,20 +135,20 @@ namespace JOT.GaiaClient
         /// Client implementation for JOT Automation gaia platform machines
         /// </summary>
         /// <param name="baseUrl">URL for the controlled machine</param>
-        public JOTGaiaClient(string baseUrl, string user = "", string password = "")
+        public JOTGaiaClient(string baseUrl, string user = "", string password = "", bool ignoreVersionCheck = false)
             : base("Machine State")
         {
-            connect(new Uri(baseUrl), user, password);
+            connect(new Uri(baseUrl), user, password, ignoreVersionCheck);
         }
 
         /// <summary>
         /// Client implementation for JOT Automation gaia platform machines
         /// </summary>
         /// <param name="baseUrl">URL for the controlled machin</param>
-        public JOTGaiaClient(Uri baseUrl, string user = "", string password = "")
+        public JOTGaiaClient(Uri baseUrl, string user = "", string password = "", bool ignoreVersionCheck = false)
              : base("Machine State")
         {
-            connect(baseUrl, user, password);
+            connect(baseUrl, user, password, ignoreVersionCheck);
         }
 
         public enum States
@@ -183,7 +183,7 @@ namespace JOT.GaiaClient
             WaitState(state.ToString(), timeOut_ms, raiseOnError);
         }
 
-        private void connect(Uri url, string user, string password)
+        private void connect(Uri url, string user, string password, bool ignoreVersionCheck)
         {
             // create client
             myRestClient = new RestClient(url);
@@ -199,10 +199,13 @@ namespace JOT.GaiaClient
                 throw version_response.ErrorException ?? new Exception("Unknown error when trying to connect to machine.");
             }
 
-            var gaia_version = new Version(version_response.Data.properties["sw_version"].Split('-')[0]);
+            if (!ignoreVersionCheck)
+            {
+                var gaia_version = new Version(version_response.Data.properties["sw_version"].Split('-')[0]);
 
-            if (gaia_version.CompareTo(new Version("1.2.0")) < 0)
-                throw new GaiaException($"Incompatible versions. Minimun version of Gaia machine is 1.2.0. Currently {gaia_version}");
+                if (gaia_version.CompareTo(new Version("1.3.0")) < 0)
+                    throw new GaiaException($"Incompatible versions. Minimun version of Gaia machine is 1.3.0. Currently {gaia_version}");
+            }
 
             var WsUriApp = new UriBuilder(url)
             {
