@@ -127,6 +127,22 @@ namespace JOT.GaiaClient
             }
         }
 
+        /// <summary>
+        /// Returns serial number of the machine.
+        /// </summary>
+        public string SerialNumber
+        {
+            get
+            {
+                var request = new RestRequest("api", Method.GET);
+
+                request.AddHeader("Accept", "application/vnd.siren+json");
+
+                var response = (RestResponse<Siren>)myRestClient.Execute<Siren>(request);
+                return response.Data.properties["SN"];
+            }
+        }
+
         protected override WebSocket stateWS => MachineStateWebsocket;
 
         RestClient myRestClient;
